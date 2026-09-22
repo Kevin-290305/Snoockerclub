@@ -35,6 +35,7 @@ Criar um site profissional e interativo para o Snooker Club Salto (Salto/SP), ma
 - 2026-09-22: Google Maps incorporado na seção de contato (iframe output=embed sem chave, endereço completo) + botão "Traçar rota" (maps.dir) — iframe a 1162×400 verificado.
 - 2026-09-22: Dados de exemplo no banco (removíveis pelo painel): campeonatos "Campeonato de Sinuca — Snooker Club Salto" (seed automático) e "Copa Kauã da Sinuquinha" (criado em teste); 0 inscrições.
 - 2026-09-22: Senha do painel trocada pelo usuário para FlavioSnoocker2026 (responsável: Flavio) — antiga invalidada (401), nova validada; seção "Campeonatos publicados" no painel agora rotulada deixando claro o botão Excluir por campeonato; pasta Snoockersalto + zip atualizados.
+- 2026-09-22: Olhinho para mostrar/ocultar a senha no portão do painel (/admin.html) — testado: alterna password↔text e volta; pasta Snoockersalto + zip atualizados.
 
 ## Backlog
 - P1: Backend (FastAPI + Mongo) para campeonatos dinâmicos + painel admin protegido por senha (hoje os campeonatos são um bloco HTML fácil de editar, marcado com comentário).

@@ -1354,6 +1354,27 @@ section[id] { scroll-margin-top: 96px; }
   font-size: 0.88rem;
 }
 .admin-empty { color: var(--muted); font-size: 0.9rem; font-style: italic; padding: 14px 2px; }
+
+/* ---------- Olhinho da senha ---------- */
+.pass-wrap { position: relative; }
+.pass-wrap input { padding-right: 50px; }
+.pass-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 0;
+  color: var(--brass);
+  cursor: pointer;
+  padding: 8px;
+  display: grid;
+  place-items: center;
+  opacity: 0.85;
+  transition: opacity 0.2s, color 0.2s;
+}
+.pass-toggle:hover { opacity: 1; color: var(--brass-light); }
+.pass-toggle svg { width: 20px; height: 20px; }
 @media (max-width: 720px) {
   .admin-section { padding: 26px 20px; }
   .map-wrap iframe { height: 280px; }
