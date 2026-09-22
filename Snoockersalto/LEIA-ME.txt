@@ -1,0 +1,31 @@
+SNOOKER CLUB SALTO — ARQUIVOS DO SITE
+======================================
+
+Esta pasta contém TODOS os arquivos do site (versão limpa e organizada).
+Pode hospedar em qualquer lugar (Hostinger, GoDaddy, Netlify, Vercel etc.)
+ou simplesmente abrir o index.html no navegador.
+
+O QUE É CADA COISA
+------------------
+index.html ......... A página principal do site (o site inteiro está aqui)
+inscricao.html ..... A página da ficha de inscrição em campeonatos
+css/style.css ...... A aparência do site inteiro (cores, tamanhos, responsivo)
+js/site.js ......... O código do botão de WhatsApp, do selo
+                     "Aberto agora/Fechado agora" e das animações
+img/logo-hires.jpg . A logo do clube em alta qualidade
+img/clube-*.jpg .... As 4 fotos reais do clube
+
+COMO EDITAR
+-----------
+- Para trocar um campeonato: abra index.html, procure por
+  "champ-card" (tem um comentário ensinando a copiar o bloco)
+- Para mudar horários: abra index.html e procure "hours-list"
+  (e confira se o js/site.js continua batendo com os horários)
+- Para mudar cores: abra css/style.css e edite o bloco ":root" no topo
+
+IMPORTANTE
+----------
+- As pastas "css", "js" e "img" precisam ficar ao lado dos arquivos
+  index.html e inscricao.html, com esses mesmos nomes
+- O WhatsApp das inscrições vai para +55 11 98515-7388
+  (para trocar o número, procure por "wa.me/5511985157388" nos arquivos)

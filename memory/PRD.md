@@ -29,6 +29,8 @@ Criar um site profissional e interativo para o Snooker Club Salto (Salto/SP), ma
 ## Status
 - 2026-09-22: MVP entregue — home completa + página de inscrição, verificado com screenshots (desktop 1440 e mobile 390) e curl 200 em todas as rotas. Corrigidos: caminho %PUBLIC_URL% em inscricao.html (página sem estilo), overflow-x dos inputs de rádio, contraste/cor do botão da navbar.
 - 2026-09-22: Responsividade completa — verificado sem overflow-x em 1920×1080, 1440×900, 768×1024, 414×896, 390×844 e 360×800. Menu hamburger ativado até 900px, navbar compacta ≤1180px, breakpoints novos: ≤400px (celulares pequenos), paisagem baixa (max-height 560), ≥1600px (monitores grandes), @media (hover: none) para legendas da galeria em toque.
+- 2026-09-22: Link do Instagram corrigido para https://www.instagram.com/snookerclube_salto/ (home + inscrição + JSON-LD; frontend reiniciado para limpar cache do template).
+- 2026-09-22: Pasta organizada /app/Snoockersalto (index.html, inscricao.html, css/, js/, img/, LEIA-ME.txt) com cópia limpa e portátil do site + /app/Snoockersalto.zip para download. Site no preview segue servido por frontend/public.
 
 ## Backlog
 - P1: Backend (FastAPI + Mongo) para campeonatos dinâmicos + painel admin protegido por senha (hoje os campeonatos são um bloco HTML fácil de editar, marcado com comentário).
