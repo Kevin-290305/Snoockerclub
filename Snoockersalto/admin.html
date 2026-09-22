@@ -263,10 +263,10 @@
         });
 
         // Olhinho: mostrar/ocultar a senha
-        var OLHO =
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3"/></svg>';
-        var OLHO_FECHADO =
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.94 17.94A10.5 10.5 0 0 1 12 19c-6.5 0-10-7-10-7a19.8 19.8 0 0 1 5.06-5.94M9.9 4.24A9.9 9.9 0 0 1 12 5c6.5 0 10 7 10 7a19.8 19.8 0 0 1-3.22 4.19M1 1l22 22" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var OLHO =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3"/></svg>';
+var OLHO_FECHADO =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M17.94 17.94A10.5 10.5 0 0 1 12 19c-6.5 0-10-7-10-7a19.8 19.8 0 0 1 5.06-5.94M9.9 4.24A9.9 9.9 0 0 1 12 5c6.5 0 10 7 10 7a19.8 19.8 0 0 1-3.22 4.19M1 1l22 22" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         document.getElementById("toggle-senha").addEventListener("click", function () {
           var campo = document.getElementById("admin-password");
           var mostrando = campo.type === "text";

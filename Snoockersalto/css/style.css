@@ -1356,26 +1356,44 @@ section[id] { scroll-margin-top: 96px; }
 .admin-empty { color: var(--muted); font-size: 0.9rem; font-style: italic; padding: 14px 2px; }
 
 /* ---------- Olhinho da senha ---------- */
-.pass-wrap { position: relative; }
-.pass-wrap input { padding-right: 50px; }
+.pass-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pass-wrap input {
+  padding-right: 48px;
+  width: 100%;
+}
+
 .pass-toggle {
   position: absolute;
-  right: 8px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
-  border: 0;
-  color: var(--brass);
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--brass, #d4af37); /* Fallback para cor dourada caso --brass não exista */
   cursor: pointer;
-  padding: 8px;
-  display: grid;
-  place-items: center;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0.85;
+  z-index: 2; /* Garante que fique por cima do input */
   transition: opacity 0.2s, color 0.2s;
 }
-.pass-toggle:hover { opacity: 1; color: var(--brass-light); }
-.pass-toggle svg { width: 20px; height: 20px; }
-@media (max-width: 720px) {
-  .admin-section { padding: 26px 20px; }
-  .map-wrap iframe { height: 280px; }
+
+.pass-toggle:hover {
+  opacity: 1;
+  color: var(--brass-light, #f3e5ab);
+}
+
+.pass-toggle svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  stroke: currentColor; /* Força o ícone a herdar a cor do botão */
 }
