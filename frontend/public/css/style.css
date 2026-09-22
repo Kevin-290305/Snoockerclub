@@ -1105,6 +1105,107 @@ section[id] { scroll-margin-top: 96px; }
 
 @media (max-width: 720px) {
   .section { padding: 72px 0; }
+
+  .hero { padding-top: 120px; }
+  .hero-title { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+  .hero-stats { gap: 20px; }
+  .chapters { grid-template-columns: 1fr; }
+  .chapters .chapter:last-child { grid-column: auto; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .g-big { grid-column: auto; aspect-ratio: 4 / 5; }
+  .field-row { flex-direction: column; gap: 0; }
+  .form-card { padding: 34px 24px; }
+  .live-body { padding: 36px 26px; }
+  .champ-card { padding: 30px 24px; }
+  .wa-fab { right: 18px; bottom: 18px; width: 56px; height: 56px; }
+  .scroll-hint { display: none; }
+}
+
+/* ---------- Telas muito pequenas (até 400px) ---------- */
+@media (max-width: 400px) {
+  .container { width: calc(100% - 32px); }
+  .btn { padding: 14px 22px; font-size: 0.9rem; }
+  .brand-name { font-size: 0.78rem; }
+  .brand-logo { width: 40px; height: 40px; }
+  .hero { padding: 104px 0 44px; }
+  .hero-title { font-size: clamp(2.05rem, 10.5vw, 2.6rem); }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-stats { gap: 14px 22px; margin-top: 34px; padding-top: 20px; }
+  .hero-stats strong { font-size: 1.2rem; }
+  .logo-frame { padding: 10px; border-radius: 20px; }
+  .ball-orbit { width: 58px; height: 58px; }
+  .ball-orbit .ball-8 { font-size: 1.1rem; }
+  .section { padding: 60px 0; }
+  .section-head { margin-bottom: 38px; }
+  .chapter { padding: 26px 20px; }
+  .chapter-num { font-size: 3.2rem; }
+  .club-feature figcaption { padding: 30px 22px; }
+  .champ-card { padding: 26px 20px; }
+  .champ-card h3 { font-size: 1.4rem; }
+  .champ-side { padding: 28px 22px; }
+  .live-body { padding: 30px 20px; }
+  .live-media { min-height: 200px; }
+  .hours-list li { padding: 14px 12px; }
+  .hours-list .day { font-size: 0.88rem; gap: 9px; }
+  .contact-card { padding: 24px 20px; }
+  .form-card { padding: 30px 20px; }
+  .field-row { flex-direction: column; gap: 0; }
+  .radio-pill span { padding: 10px 16px; font-size: 0.8rem; }
+  .wa-fab { width: 50px; height: 50px; right: 14px; bottom: 14px; }
+  .wa-fab svg { width: 26px; height: 26px; }
+  .lightbox { padding: 12px; }
+  .lightbox img { max-height: 74vh; }
+  .lb-close { top: 6px; right: 6px; width: 40px; height: 40px; }
+  .footer { padding: 54px 0 30px; }
+  .footer-links { gap: 16px; }
+}
+
+/* ---------- Celulares na horizontal / telas baixas ---------- */
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero { min-height: auto; padding: 116px 0 44px; }
+  .scroll-hint { display: none; }
+  .hero-stats { margin-top: 28px; }
+  .logo-frame { width: min(240px, 42vh); }
+}
+
+/* ---------- Monitores grandes (1600px ou mais) ---------- */
+@media (min-width: 1600px) {
+  .container { width: min(1340px, 100% - 64px); }
+  .hero-title { font-size: clamp(3.6rem, 5vw, 6.2rem); }
+  .section { padding: 132px 0; }
+  .chapters, .gallery, .contact-grid { gap: 24px; }
+  .section-title { font-size: clamp(2.4rem, 3.4vw, 3.9rem); }
+  .chapter h3 { font-size: 1.7rem; }
+  .champ-card h3 { font-size: 1.95rem; }
+  .live-media { min-height: 420px; }
+}
+
+/* ---------- Tablets em pé (720px a 1020px) ---------- */
+@media (min-width: 721px) and (max-width: 1020px) {
+  .hero-grid { gap: 36px; }
+  .logo-frame { width: min(340px, 60%); }
+  .hero-visual { padding-top: 8px; }
+  .gallery { gap: 16px; }
+  .contact-grid { gap: 16px; }
+  .live-body { padding: 44px 36px; }
+  .chapters { gap: 18px; }
+}
+
+/* ---------- Navbar compacta em telas médias ---------- */
+@media (max-width: 1180px) {
+  .nav-inner { gap: 18px; }
+  .nav-links { gap: 18px; }
+  .nav-links > a { font-size: 0.82rem; }
+  .brand-name { font-size: 0.85rem; }
+  .nav-status { display: none; }
+  .btn-sm { padding: 10px 18px; font-size: 0.8rem; white-space: nowrap; }
+}
+
+/* ---------- Menu hamburger (até 900px) ---------- */
+@media (max-width: 900px) {
+  .brand-name { white-space: nowrap; }
+  .nav-links > a { white-space: nowrap; }
   .menu-btn {
     display: grid;
     gap: 5px;
@@ -1144,20 +1245,12 @@ section[id] { scroll-margin-top: 96px; }
     opacity: 1;
     pointer-events: auto;
   }
-  .nav-status { border: 0; padding: 0; }
+  .nav-links .nav-status { display: inline-flex; border: 0; padding: 0; }
+}
 
-  .hero { padding-top: 120px; }
-  .hero-title { font-size: clamp(2.4rem, 11vw, 3.4rem); }
-  .hero-stats { gap: 20px; }
-  .chapters { grid-template-columns: 1fr; }
-  .chapters .chapter:last-child { grid-column: auto; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .gallery { grid-template-columns: 1fr; }
-  .g-big { grid-column: auto; aspect-ratio: 4 / 5; }
-  .field-row { flex-direction: column; gap: 0; }
-  .form-card { padding: 34px 24px; }
-  .live-body { padding: 36px 26px; }
-  .champ-card { padding: 30px 24px; }
-  .wa-fab { right: 18px; bottom: 18px; width: 56px; height: 56px; }
-  .scroll-hint { display: none; }
+/* ---------- Aparelhos de toque: legendas sempre visíveis ---------- */
+@media (hover: none) {
+  .g-item figcaption { opacity: 1; transform: none; }
+  .chapter:hover { transform: none; }
+  .contact-card:hover, .champ-card:hover { transform: none; }
 }
