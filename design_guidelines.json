@@ -1,0 +1,298 @@
+{
+  "project_name": "Snooker Club Salto - Awwwards Marketing Site Blueprint",
+  "client_identity": {
+    "brand_name": "Snooker Club Salto",
+    "location": "Rua John Kennedy, 379 - Bela Vista, Salto/SP, Brasil",
+    "whatsapp_number": "+5511985157388",
+    "formatted_whatsapp": "+55 11 98515-7388",
+    "youtube_channel": "Kauã da Sinuquinha",
+    "youtube_url": "https://www.youtube.com/@kauadasinuquinha",
+    "language": "pt-BR",
+    "design_archetype": "English Snooker Hall at Night (Dark Modern + Classic British Luxury)",
+    "aesthetic_synthesis": "Dark navy felt surface depth paired with rich mahogany wood textures, brass/gold precision accents, crimson tournament highlights, and high-contrast editorial typography."
+  },
+  "typography": {
+    "heading_font": {
+      "name": "Cormorant Garamond",
+      "google_font_url": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Cinzel:wght@600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap",
+      "usage": "H1, H2, H3, Section Hero Titles, Manifesto Headings",
+      "css_class": "font-serif",
+      "style": "tracking-tight font-semibold"
+    },
+    "subheading_font": {
+      "name": "Cinzel",
+      "usage": "Overlines, Category Badges, Chapter Numbers, Tournament Headers, Trophy Titles",
+      "css_class": "font-display",
+      "style": "uppercase tracking-[0.2em] font-bold"
+    },
+    "body_font": {
+      "name": "Plus Jakarta Sans",
+      "usage": "Body narrative, form controls, table data, UI buttons, meta info",
+      "css_class": "font-sans",
+      "style": "leading-relaxed"
+    },
+    "banned_fonts": [
+      "Inter",
+      "Roboto",
+      "Open Sans",
+      "Space Grotesk"
+    ],
+    "scale": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08]",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-serif",
+      "h3_card": "text-xl sm:text-2xl font-serif",
+      "overline": "text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#d4af37]",
+      "body_large": "text-base sm:text-lg text-[#f7f4ee]/80 font-normal",
+      "body_regular": "text-sm sm:text-base text-[#f7f4ee]/70 leading-relaxed",
+      "caption_micro": "text-xs tracking-wider uppercase text-[#f7f4ee]/50"
+    }
+  },
+  "colors": {
+    "background_primary": "#0d1230",
+    "background_secondary": "#080b1e",
+    "background_card": "#131a42",
+    "background_elevated": "#1a2356",
+    "felt_green_primary": "#004d25",
+    "felt_green_vibrant": "#1a4731",
+    "felt_green_glow": "#10b981",
+    "crimson_red": "#c8102e",
+    "crimson_hover": "#e01435",
+    "brass_gold_accent": "#d4af37",
+    "brass_gold_muted": "#c5a059",
+    "brass_gold_light": "#f3e5ab",
+    "wood_mahogany_dark": "#2a170c",
+    "wood_walnut_accent": "#3d2314",
+    "wood_border": "#5c3820",
+    "text_primary": "#f7f4ee",
+    "text_muted": "#b3b9cc",
+    "text_dark_on_gold": "#0d1230",
+    "border_subtle": "rgba(212, 175, 55, 0.18)",
+    "border_vibrant": "rgba(200, 16, 46, 0.4)",
+    "glass_background": "rgba(13, 18, 48, 0.78)",
+    "glass_border": "rgba(212, 175, 55, 0.25)"
+  },
+  "visual_enhancers": {
+    "noise_texture": "repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 4px)",
+    "felt_texture": "radial-gradient(circle at 50% 50%, rgba(26,71,49,0.3) 0%, rgba(13,18,48,0.9) 80%)",
+    "wood_carving_border": "1px solid #5c3820 shadow-[inset_0_1px_0_0_rgba(243,229,171,0.2)]",
+    "gold_glow_shadow": "0 0 25px rgba(212, 175, 55, 0.15)",
+    "crimson_pulse_shadow": "0 0 20px rgba(200, 16, 46, 0.35)",
+    "spotlight_gradient": "radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.08), transparent 80%)"
+  },
+  "sections_breakdown": [
+    {
+      "id": "header_nav",
+      "name": "Navegação Principal (Header & Floating Bar)",
+      "description": "Sticky glassmorphism nav bar with gold inner hairline border, live open badge indicator, language/club status, links, and direct CTA 'Reservar Mesa'.",
+      "components": [
+        "Brand Logo Badge with emblem",
+        "Nav Links: 'O Club', 'Manifesto', 'Campeonatos', 'Ao Vivo (YouTube)', 'Galeria', 'Contato'",
+        "Live Status Badge: 'ABERTO AGORA' (Green Pulse) / 'FECHADO NO MOMENTO' (Crimson Muted)",
+        "CTA Button: 'Agendar via WhatsApp'",
+        "Admin Key trigger icon (opens password dialog)"
+      ]
+    },
+    {
+      "id": "hero_kinetic",
+      "name": "Hero Section & Kinetic Mask Reveal",
+      "description": "Line-by-line kinetic reveal animation. High-impact dark backdrop with spotlight overhead pool lamp effect. Features main headline in Portuguese, key club statistics counter, and dual action buttons.",
+      "headline": "A Tradição do Snooker Inglês no Coração de Salto",
+      "subheadline": "Mesa profissional de feltro nobre, tacos balanceados e a atmosfera perfeita para quem joga por paixão e precisão.",
+      "ctas": [
+        "Inscria-se nos Campeonatos",
+        "Conheça o Clube"
+      ],
+      "hero_image_url": "https://images.pexels.com/photos/18687159/pexels-photo-18687159.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "id": "editorial_marquee",
+      "name": "Fita Editorial em Movimento (Editorial Marquee)",
+      "description": "Slow, elegant drift with low-contrast warm text separated by gold pool ball icons.",
+      "phrases": [
+        "MESA PROFISSIONAL TACO DE MADEIRA NOBRE",
+        "SINOQUINHA AO VIVO COM KAUÃ",
+        "CAMPEONATOS MENSAIS COM PREMIAÇÃO",
+        "O PONTO DE ENCONTRO DOS AMANTES DA SINUCA EM SALTO-SP",
+        "BEBIDAS GELADAS E AMBIENTE CLIMATIZADO"
+      ]
+    },
+    {
+      "id": "manifesto_chapters",
+      "name": "O Manifesto da Sinuca de Elite (Numbered Chapters)",
+      "description": "Asymmetric 3-column bento layout detailing the club's philosophy through numbered chapters.",
+      "chapters": [
+        {
+          "number": "01",
+          "title": "A Geometria da Tacada Perfeita",
+          "text": "Cada ângulo é medido, cada efeito calculado. No Salto Snooker Club, a mesa é um santuário de precisão."
+        },
+        {
+          "number": "02",
+          "title": "A Tradição do Feltro Verde",
+          "text": "Feltro importado de altíssima gramatura que garante o deslize impecável das esferas de resina fenólica."
+        },
+        {
+          "number": "03",
+          "title": "Camaradagem & Competição",
+          "text": "Um ambiente clássico inglês feito para desfrutar boas conversas, partidas acirradas e grandes amizades."
+        }
+      ]
+    },
+    {
+      "id": "championships_api",
+      "name": "Seção de Campeonatos (Backend Dynamic Feed + Registration Modal)",
+      "description": "Fetches current tournaments from backend `/api/championships`. Features status badges ('Inscrições Abertas', 'Em Andamento', 'Finalizado'), prize pool details, date cards, and an interactive Registration Modal.",
+      "registration_flow": "User fills registration form -> Form validates data -> On submit, generates WhatsApp deep link encoded message sent to +55 11 98515-7388.",
+      "form_fields": [
+        "nome_completo / nome_equipe",
+        "idade",
+        "genero",
+        "championship_id (selection)",
+        "telefone_whatsapp",
+        "observacoes"
+      ]
+    },
+    {
+      "id": "youtube_lives",
+      "name": "Canal Ao Vivo - Kauã da Sinuquinha",
+      "description": "Integration highlight for channel 'Kauã da Sinuquinha'. Dark video showcase cards with golden live badges, embedded play previews, and subscriber call-to-action.",
+      "channel_url": "https://www.youtube.com/@kauadasinuquinha",
+      "featured_image": "https://images.pexels.com/photos/6253682/pexels-photo-6253682.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "id": "real_gallery",
+      "name": "Galeria do Clube & Fotos Profissionais",
+      "description": "Interactive light-box photo gallery with filter tabs ('Todas', 'Ambiente Clássico', 'Mesas & Equipamentos', 'Torneios').",
+      "gallery_images": [
+        {
+          "url": "https://images.pexels.com/photos/18687159/pexels-photo-18687159.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "category": "Ambiente Clássico",
+          "title": "Salão Clássico Estilo Inglês"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1763830915739-b560abcd5fd4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwxfHxzbm9va2VyJTIwcG9vbCUyMGhhbGwlMjBncmVlbiUyMGZlbHQlMjB0YWJsZSUyMGxpZ2h0c3xlbnwwfHx8fDE3OTAxMTAxNzB8MA&ixlib=rb-4.1.0&q=85",
+          "category": "Mesas & Equipamentos",
+          "title": "Bolas Profissionais e Feltro Verde"
+        },
+        {
+          "url": "https://images.pexels.com/photos/15473886/pexels-photo-15473886.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "category": "Mesas & Equipamentos",
+          "title": "Iluminação Focal sobre a Mesa"
+        },
+        {
+          "url": "https://images.pexels.com/photos/28909614/pexels-photo-28909614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "category": "Mesas & Equipamentos",
+          "title": "Tacos Selecionados em Suporte de Madeira"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1514820720301-4c4790309f46?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwyfHxzbm9va2VyJTIwdHJvcGh5JTIwY2hhbXBpb25zaGlwJTIwdG91cm5hbWVudCUyMHdpbm5lcnxlbnwwfHx8fDE3OTAxMTAxNzd8MA&ixlib=rb-4.1.0&q=85",
+          "category": "Torneios",
+          "title": "Troféus e Premiações dos Campeonatos"
+        }
+      ]
+    },
+    {
+      "id": "opening_hours_and_location",
+      "name": "Horário de Funcionamento & Localização (Google Maps)",
+      "description": "Grid box featuring calculated live open status based on Salto/SP timezone (UTC-3), schedule list, address details, interactive directions CTA, and embedded dark-styled Google Maps iframe/card.",
+      "address": "Rua John Kennedy, 379 - Bela Vista, Salto/SP",
+      "google_maps_url": "https://maps.google.com/?q=Rua+John+Kennedy+379+Bela+Vista+Salto+SP",
+      "schedule": [
+        {"day": "Segunda a Quinta", "hours": "17:00 - 00:00"},
+        {"day": "Sexta e Sábado", "hours": "16:00 - 02:00"},
+        {"day": "Domingo e Feriados", "hours": "15:00 - 23:00"}
+      ]
+    },
+    {
+      "id": "floating_whatsapp",
+      "name": "Botão Flutuante do WhatsApp",
+      "description": "Sticky bottom-right action trigger (+55 11 98515-7388) styled with pulse animation, crimson/gold accent trim, and quick popup drawer with pre-written options.",
+      "phone": "+5511985157388",
+      "default_message": "Olá! Gostaria de informações sobre o Snooker Club Salto e reserva de mesas."
+    },
+    {
+      "id": "admin_modal",
+      "name": "Área de Administração Protegida (Gestão de Campeonatos)",
+      "description": "Dialog triggered via header key/icon or secret route footer link. Protected by password challenge. Allows creating, editing, and deleting championships dynamically.",
+      "backend_endpoints": [
+        "POST /api/admin/login",
+        "GET /api/championships",
+        "POST /api/championships",
+        "DELETE /api/championships/:id"
+      ]
+    }
+  ],
+  "motion_specs": {
+    "lenis_smooth_scroll": {
+      "duration": 1.2,
+      "easing": "easeOutExpo",
+      "smoothTouch": false
+    },
+    "framer_motion_defaults": {
+      "initial": {"opacity": 0, "y": 28},
+      "whileInView": {"opacity": 1, "y": 0},
+      "viewport": {"once": true, "margin": "-80px"},
+      "transition": {"duration": 0.7, "ease": [0.215, 0.61, 0.355, 1]}
+    },
+    "hero_masked_lines": {
+      "stagger_children": 0.15,
+      "mask_overflow": "hidden"
+    }
+  },
+  "testing_and_qa": {
+    "data_testid_convention": "kebab-case, role-based, semantic",
+    "mandatory_ids": [
+      "nav-brand-logo",
+      "nav-link-club",
+      "nav-link-championships",
+      "nav-link-youtube",
+      "nav-link-gallery",
+      "nav-link-contact",
+      "nav-btn-reserve",
+      "live-status-badge",
+      "hero-headline",
+      "hero-cta-championships",
+      "hero-cta-explore",
+      "manifesto-chapter-01",
+      "manifesto-chapter-02",
+      "manifesto-chapter-03",
+      "championship-card-item",
+      "championship-register-btn",
+      "modal-registration-form",
+      "input-register-name",
+      "input-register-age",
+      "select-register-gender",
+      "select-register-championship",
+      "input-register-phone",
+      "submit-register-whatsapp-btn",
+      "youtube-channel-btn",
+      "gallery-filter-all",
+      "gallery-filter-ambiente",
+      "gallery-filter-mesas",
+      "gallery-filter-torneios",
+      "gallery-image-item",
+      "opening-hours-card",
+      "google-maps-directions-btn",
+      "floating-whatsapp-btn",
+      "admin-access-trigger",
+      "admin-password-input",
+      "admin-login-submit-btn",
+      "admin-create-championship-btn"
+    ]
+  },
+  "image_urls": {
+    "hero_bg": "https://images.pexels.com/photos/18687159/pexels-photo-18687159.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "felt_table_close_up": "https://images.unsplash.com/photo-1763830915739-b560abcd5fd4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwxfHxzbm9va2VyJTIwcG9vbCUyMGhhbGwlMjBncmVlbiUyMGZlbHQlMjB0YWJsZSUyMGxpZ2h0c3xlbnwwfHx8fDE3OTAxMTAxNzd8MA&ixlib=rb-4.1.0&q=85",
+    "dim_lighting_table": "https://images.pexels.com/photos/15473886/pexels-photo-15473886.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "cue_tips_rack": "https://images.pexels.com/photos/28909614/pexels-photo-28909614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "youtube_thumbnail_bg": "https://images.pexels.com/photos/6253682/pexels-photo-6253682.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "trophies_championship": "https://images.unsplash.com/photo-1514820720301-4c4790309f46?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwyfHxzbm9va2VyJTIwdHJvcGh5JTIwY2hhbXBpb25zaGlwJTIwdG91cm5hbWVudCUyMHdpbm5lcnxlbnwwfHx8fDE3OTAxMTAxNzd8MA&ixlib=rb-4.1.0&q=85"
+  },
+  "universal_guidelines": [
+    "Always tint background darks with navy tone #0d1230 instead of plain pure black #000000.",
+    "Maintain high APCA contrast for body text using #f7f4ee warm off-white.",
+    "Do not use generic Bootstrap columns; mix bento grids with asymmetric cards.",
+    "Ensure every interactive element features hover states and data-testid attributes.",
+    "Use smooth scrolling via Lenis and framer-motion reveals throughout the entire marketing flow."
+  ]
+}
