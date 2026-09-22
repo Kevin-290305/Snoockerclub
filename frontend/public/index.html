@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080b1e" />
+    <meta
+      name="description"
+      content="Snooker Club Salto — O maior clube de snooker da região. Mesas de sinuca, campeonatos e lives em Salto/SP. Rua John Kennedy, 379 - Bela Vista."
+    />
+    <link rel="icon" href="%PUBLIC_URL%/img/logo-hires.jpg" type="image/jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/style.css" />
+    <title>Snooker Club Salto — O maior clube de snooker da região</title>
+    <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
+    <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsActivityLocation",
+        "name": "Snooker Club Salto",
+        "slogan": "O maior clube de Snooker da região",
+        "foundingDate": "2022",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rua John Kennedy, 379 - Bela Vista",
+          "addressLocality": "Salto",
+          "addressRegion": "SP",
+          "postalCode": "13321-380",
+          "addressCountry": "BR"
+        },
+        "telephone": "+5511985157388",
+        "sameAs": [
+          "https://instagram.com/snookerclube_salto",
+          "https://www.youtube.com/@kauadasinuquinha"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <header class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="#inicio" data-testid="nav-brand-logo">
+          <img src="%PUBLIC_URL%/img/logo-hires.jpg" alt="Logo Snooker Club Salto" class="brand-logo" />
+          <span class="brand-name">Snooker <em>Club</em> <small>SALTO</small></span>
+        </a>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Abrir menu" />
+        <label for="menu-toggle" class="menu-btn" data-testid="nav-menu-button" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </label>
+
+        <nav class="nav-links">
+          <a href="#clube" data-testid="nav-link-clube">O Clube</a>
+          <a href="#galeria" data-testid="nav-link-galeria">Galeria</a>
+          <a href="#campeonatos" data-testid="nav-link-campeonatos">Campeonatos</a>
+          <a href="#lives" data-testid="nav-link-lives">Lives</a>
+          <a href="#horarios" data-testid="nav-link-horarios">Horários</a>
+          <a href="#contato" data-testid="nav-link-contato">Contato</a>
+          <span class="nav-status" data-testid="live-status-badge" data-open-badge>
+            <span class="dot"></span>Verificando…
+          </span>
+          <a class="btn btn-gold btn-sm" href="inscricao.html" data-testid="nav-btn-inscricao">Inscreva seu time</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
+      <div class="hero-lamp" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow">Snooker Club Salto · Desde 2022</p>
+          <h1 class="hero-title" data-testid="hero-headline">
+            <span class="h-line"><span>O maior clube</span></span>
+            <span class="h-line"><span>de <em class="felt">Snooker</em></span></span>
+            <span class="h-line"><span>da região<span class="dot-gold">.</span></span></span>
+          </h1>
+          <p class="hero-sub">
+            Conforto e entretenimento para todas as famílias, com a experiência única
+            do esporte da sinuca — em Salto/SP.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn btn-gold" href="#campeonatos" data-testid="hero-cta-campeonatos">Ver campeonatos</a>
+            <a class="btn btn-ghost" href="https://wa.me/5511985157388?text=Ol%C3%A1!%20Quero%20informa%C3%A7%C3%B5es%20sobre%20o%20Snooker%20Club%20Salto." target="_blank" rel="noopener" data-testid="hero-cta-whatsapp">Falar no WhatsApp</a>
+          </div>
+          <ul class="hero-stats">
+            <li><strong>2022</strong><span>fundação do clube</span></li>
+            <li><strong>Salto/SP</strong><span>Bela Vista</span></li>
+            <li><strong>Campeonatos</strong><span>e lives no YouTube</span></li>
+          </ul>
+        </div>
+        <div class="hero-visual">
+          <div class="logo-frame">
+            <img src="%PUBLIC_URL%/img/logo-hires.jpg" alt="Emblema do Snooker Club Salto" data-testid="hero-logo" />
+          </div>
+          <div class="ball-orbit" aria-hidden="true"><span class="ball-8">8</span></div>
+        </div>
+      </div>
+      <a class="scroll-hint" href="#clube" aria-label="Rolar para o conteúdo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14m0 0l-6-6m6 6l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Campeonatos</span><i class="m-ball"></i><span>Lives no YouTube</span><i class="m-ball"></i><span>O maior clube de snooker da região</span><i class="m-ball"></i><span>Desde 2022</span><i class="m-ball"></i><span>Salto · São Paulo</span><i class="m-ball"></i>
+        <span>Campeonatos</span><i class="m-ball"></i><span>Lives no YouTube</span><i class="m-ball"></i><span>O maior clube de snooker da região</span><i class="m-ball"></i><span>Desde 2022</span><i class="m-ball"></i><span>Salto · São Paulo</span><i class="m-ball"></i>
+      </div>
+    </div>
+
+    <!-- ===== O CLUBE / MANIFESTO ===== -->
+    <section class="section" id="clube">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Sobre o clube</p>
+          <h2 class="section-title">Tradição inglesa,<br /><em>alma de Salto</em></h2>
+        </div>
+
+        <div class="chapters">
+          <article class="chapter" data-reveal data-testid="manifesto-chapter-01">
+            <span class="chapter-num">01</span>
+            <div>
+              <h3>A história</h3>
+              <p>
+                O <strong>Snooker Club Salto</strong> existe desde <strong>2022</strong> e nasceu
+                para ser um ponto de encontro de quem ama a sinuca — um espaço
+                feito de tacadas, histórias e comunidade.
+              </p>
+            </div>
+          </article>
+
+          <article class="chapter" data-reveal data-delay="1" data-testid="manifesto-chapter-02">
+            <span class="chapter-num">02</span>
+            <div>
+              <h3>O diferencial</h3>
+              <p>
+                Oferecer <strong>conforto e entretenimento a todas as famílias</strong>,
+                proporcionando uma experiência única por meio do esporte da sinuca.
+              </p>
+            </div>
+          </article>
+
+          <article class="chapter" data-reveal data-delay="2" data-testid="manifesto-chapter-03">
+            <span class="chapter-num">03</span>
+            <div>
+              <h3>O esporte</h3>
+              <p>
+                Mesa verde, luz baixa e silêncio na hora da tacada. Aqui o snooker é
+                levado a sério — do primeiro choque ao último frame.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <figure class="club-feature" data-reveal>
+          <img src="img/clube-salao-1.jpg" alt="Salão do Snooker Club Salto com mesas profissionais" data-testid="clube-foto-destaque" />
+          <figcaption>
+            <span class="eyebrow">A casa</span>
+            <p>Salão amplo, iluminação de mesa a mesa e ambiente para toda a família.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== GALERIA ===== -->
+    <section class="section section-alt" id="galeria">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Galeria</p>
+          <h2 class="section-title">O clube por <em>dentro</em></h2>
+          <p class="section-sub">Fotos reais do nosso salão, misturadas ao clima clássico do snooker inglês.</p>
+        </div>
+
+        <div class="gallery">
+          <a class="g-item g-big frame" href="#foto-fachada" data-reveal data-testid="gallery-image-item">
+            <img src="img/clube-fachada.jpg" alt="Fachada do Snooker Club Salto à noite" />
+            <figcaption><span>Fachada</span>Fachada iluminada do clube</figcaption>
+          </a>
+          <a class="g-item frame" href="#foto-salao" data-reveal data-delay="1" data-testid="gallery-image-item">
+            <img src="img/clube-salao-1.jpg" alt="Salão com mesas e bandeiras do Brasil" />
+            <figcaption><span>Salão principal</span>Mesas profissionais lado a lado</figcaption>
+          </a>
+          <a class="g-item frame" href="#foto-mesa" data-reveal data-testid="gallery-image-item">
+            <img src="img/clube-mesa-logo.jpg" alt="Mesa de sinuca com a logo do clube na parede" />
+            <figcaption><span>Mesa & marca</span>A logo no coração do salão</figcaption>
+          </a>
+          <a class="g-item frame" href="#foto-salao2" data-reveal data-delay="1" data-testid="gallery-image-item">
+            <img src="img/clube-salao-2.jpg" alt="Vista ampla do salão do clube" />
+            <figcaption><span>Ambiente</span>Espaço para jogar e para a família</figcaption>
+          </a>
+          <a class="g-item frame" href="#foto-bolas" data-reveal data-testid="gallery-image-item">
+            <img src="https://images.unsplash.com/photo-1776513726158-403f72e6e5a2?crop=entropy&cs=srgb&fm=jpg&q=85" alt="Bolas de sinuca sobre o feltro verde" loading="lazy" />
+            <figcaption><span>Detalhe</span>Bolas sobre o feltro verde</figcaption>
+          </a>
+          <a class="g-item frame" href="#foto-preto" data-reveal data-delay="1" data-testid="gallery-image-item">
+            <img src="https://images.unsplash.com/photo-1714564209284-1ba07d735e76?crop=entropy&cs=srgb&fm=jpg&q=85" alt="Mesa de sinuca em preto e branco" loading="lazy" />
+            <figcaption><span>Clássico</span>O snooker em preto e branco</figcaption>
+          </a>
+          <a class="g-item frame" href="#foto-jogo" data-reveal data-testid="gallery-image-item">
+            <img src="https://images.pexels.com/photos/7404682/pexels-photo-7404682.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Jogadores em jogo competitivo de sinuca" loading="lazy" />
+            <figcaption><span>Competição</span>Jogo raçado, festa limpa</figcaption>
+          </a>
+          <a class="g-item frame" href="#foto-tacada" data-reveal data-delay="1" data-testid="gallery-image-item">
+            <img src="https://images.unsplash.com/photo-1660110661640-671af78f39b7?crop=entropy&cs=srgb&fm=jpg&q=85" alt="Jogador se preparando para dar a tacada" loading="lazy" />
+            <figcaption><span>A tacada</span>Foco na hora da jogada</figcaption>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX (CSS puro via :target) -->
+    <div class="lightbox" id="foto-fachada"><figure><img src="img/clube-fachada.jpg" alt="Fachada do Snooker Club Salto à noite" /><figcaption>Fachada iluminada do clube</figcaption><a href="#galeria" class="lb-close" aria-label="Fechar" data-testid="lightbox-close">×</a></figure></div>
+    <div class="lightbox" id="foto-salao"><figure><img src="img/clube-salao-1.jpg" alt="Salão com mesas e bandeiras do Brasil" /><figcaption>Salão principal — mesas profissionais lado a lado</figcaption><a href="#galeria" class="lb-close" aria-label="Fechar" data-testid="lightbox-close">×</a></figure></div>
+    <div class="lightbox" id="foto-mesa"><figure><img src="img/clube-mesa-logo.jpg" alt="Mesa de sinuca com a logo do clube na parede" /><figcaption>Mesa & marca — a logo no coração do salão</figcaption><a href="#galeria" class="lb-close" aria-label="Fechar" data-testid="lightbox-close">×</a></figure></div>
+    <div class="lightbox" id="foto-salao2"><figure><img src="img/clube-salao-2.jpg" alt="Vista ampla do salão do clube" /><figcaption>Ambiente — espaço para jogar e para a família</figcaption><a href="#galeria" class="lb-close" aria-label="Fechar" data-testid="lightbox-close">×</a></figure></div>
+    <div class="lightbox" id="foto-bolas"><figure><img src="https://images.unsplash.com/photo-1776513726158-403f72e6e5a2?crop=entropy&cs=srgb&fm=jpg&q=85" alt="Bolas de sinuca sobre o feltro verde" /><figcaption>Bolas sobre o feltro verde</figcaption><a href="#galeria" class="lb-close" aria-label="Fechar" data-testid="lightbox-close">×</a></figure></div>
+    <div class="lightbox" id="foto-preto"><figure><img src="https://images.unsplash.com/photo-1714564209284-1ba07d735e76?crop=entropy&cs=srgb&fm=jpg&q=85" alt="Mesa de sinuca em preto e branco" /><figcaption>O snooker em preto e branco</figcaption><a href="#galeria" class="lb-close" aria-label="Fechar" data-testid="lightbox-close">×</a></figure></div>
+    <div class="lightbox" id="foto-jogo"><figure><img src="https://images.pexels.com/photos/7404682/pexels-photo-7404682.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Jogadores em jogo competitivo de sinuca" /><figcaption>Jogo raçado, festa limpa</figcaption><a href="#galeria" class="lb-close" aria-label="Fechar" data-testid="lightbox-close">×</a></figure></div>
+    <div class="lightbox" id="foto-tacada"><figure><img src="https://images.unsplash.com/photo-1660110661640-671af78f39b7?crop=entropy&cs=srgb&fm=jpg&q=85" alt="Jogador se preparando para dar a tacada" /><figcaption>Foco na hora da jogada</figcaption><a href="#galeria" class="lb-close" aria-label="Fechar" data-testid="lightbox-close">×</a></figure></div>
+
+    <!-- ===== CAMPEONATOS ===== -->
+    <section class="section" id="campeonatos">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Campeonatos</p>
+          <h2 class="section-title">Competição de <em>verdade</em></h2>
+          <p class="section-sub">Organizamos campeonatos com transmissão ao vivo no YouTube. Quer entrar na tabela? Inscreva seu time pelo WhatsApp.</p>
+        </div>
+
+        <div class="champ-grid">
+          <div class="champ-list" id="champ-list" data-testid="championship-list">
+          <!-- Para adicionar um novo campeonato, copie este bloco "champ-card" e troque os textos -->
+          <article class="champ-card" data-reveal data-testid="championship-card-item">
+            <div class="champ-top">
+              <span class="badge badge-open" data-testid="championship-status-badge">Inscrições abertas</span>
+              <svg class="champ-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 21h8m-4-4v4M7 4h10v5a5 5 0 0 1-10 0V4Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Campeonato de Sinuca — Snooker Club Salto</h3>
+            <ul class="champ-info">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 11h18" stroke-linecap="round"/></svg>
+                <span><strong>Data:</strong> novos torneios são anunciados aqui e no Instagram</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg>
+                <span><strong>Formato:</strong> individual ou dupla — confirme pelo WhatsApp</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><strong>Premiação:</strong> divulgada no início de cada edição</span>
+              </li>
+            </ul>
+            <a class="btn btn-gold btn-block" href="inscricao.html" data-testid="championship-register-btn">Escrever meu time / me inscrever</a>
+          </article>
+          </div>
+
+          <aside class="champ-side" data-reveal data-delay="1">
+            <h3>Como funciona</h3>
+            <ol class="steps">
+              <li><span>1</span>Preencha a ficha de inscrição no site.</li>
+              <li><span>2</span>Sua inscrição abre direto no WhatsApp do clube com todos os dados prontos.</li>
+              <li><span>3</span>A confirmação da vaga e os detalhes do torneio chegam por lá mesmo.</li>
+            </ol>
+            <a class="btn btn-ghost btn-block" href="https://www.instagram.com/snookerclube_salto/" target="_blank" rel="noopener" data-testid="championship-instagram-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg>
+              Avisos também no @snookerclube_salto
+            </a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LIVES / YOUTUBE ===== -->
+    <section class="section section-tight" id="lives">
+      <div class="container">
+        <div class="live-card" data-reveal data-testid="youtube-section">
+          <div class="live-media">
+            <img src="https://images.pexels.com/photos/34763004/pexels-photo-34763004.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Transmissão de jogo de sinuca" loading="lazy" />
+            <span class="live-pill"><span class="dot"></span>AO VIVO</span>
+          </div>
+          <div class="live-body">
+            <p class="eyebrow eyebrow-red">Lives no YouTube</p>
+            <h2 class="section-title">Os campeonatos, <em>ao vivo</em></h2>
+            <p class="section-sub">
+              Os jogos e campeonatos do clube são transmitidos no canal
+              <strong>Kauã da Sinuquinha</strong>. Inscreva-se no canal e não perca nenhuma tacada.
+            </p>
+            <a class="btn btn-red" href="https://www.youtube.com/@kauadasinuquinha" target="_blank" rel="noopener" data-testid="youtube-channel-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none"/></svg>
+              Acessar o canal
+            </a>
+            <p class="live-note">youtube.com/@kauadasinuquinha</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HORÁRIOS ===== -->
+    <section class="section section-alt" id="horarios">
+      <div class="container hours-grid">
+        <div data-reveal>
+          <p class="eyebrow">Horário de funcionamento</p>
+          <h2 class="section-title">Quando a <em>mesa te espera</em></h2>
+          <p class="section-sub">
+            <span class="badge badge-open" data-open-badge data-testid="open-now-badge"><span class="dot"></span>Verificando…</span>
+            Horários de horário de Salto/SP.
+          </p>
+        </div>
+
+        <div class="hours-card frame" data-reveal data-delay="1" data-testid="opening-hours-card">
+          <ul class="hours-list">
+            <li data-day="1" data-testid="hours-monday"><span class="day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 11h18" stroke-linecap="round"/></svg>Segunda-feira</span><span class="time">15h00 às 23h00</span></li>
+            <li data-day="2" data-testid="hours-tuesday"><span class="day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 11h18" stroke-linecap="round"/></svg>Terça-feira</span><span class="time time-closed">Fechado</span></li>
+            <li data-day="3" data-testid="hours-wednesday"><span class="day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 11h18" stroke-linecap="round"/></svg>Quarta-feira</span><span class="time">15h00 às 23h00</span></li>
+            <li data-day="4" data-testid="hours-thursday"><span class="day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 11h18" stroke-linecap="round"/></svg>Quinta-feira</span><span class="time">15h00 às 23h00</span></li>
+            <li data-day="5" data-testid="hours-friday"><span class="day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 11h18" stroke-linecap="round"/></svg>Sexta-feira</span><span class="time">15h00 às 23h00</span></li>
+            <li data-day="6" data-testid="hours-saturday"><span class="day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 11h18" stroke-linecap="round"/></svg>Sábado</span><span class="time">14h00 às 23h00</span></li>
+            <li data-day="0" data-testid="hours-sunday"><span class="day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4m8-4v4M3 11h18" stroke-linecap="round"/></svg>Domingo</span><span class="time">17h00 às 23h00</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTATO ===== -->
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Endereço e contato</p>
+          <h2 class="section-title">Vem <em>jogar</em> com a gente</h2>
+        </div>
+
+        <div class="contact-grid">
+          <a class="contact-card" href="https://www.google.com/maps/search/?api=1&query=RP36%2BQC+Bela+Vista+Salto+-+SP" target="_blank" rel="noopener" data-reveal data-testid="contact-maps-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3"/></svg>
+            <h3>Endereço</h3>
+            <p>Rua John Kennedy, 379<br />Bela Vista, Salto/SP<br />CEP 13321-380</p>
+            <span class="card-link">Ver no Google Maps</span>
+          </a>
+
+          <a class="contact-card" href="https://wa.me/5511985157388" target="_blank" rel="noopener" data-reveal data-delay="1" data-testid="contact-whatsapp-card">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2Zm0 18.02c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24s-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
+            <h3>WhatsApp</h3>
+            <p>(11) 98515-7388<br />+55 11 98515-7388</p>
+            <span class="card-link">Chamar no WhatsApp</span>
+          </a>
+
+          <a class="contact-card" href="https://www.instagram.com/snookerclube_salto/" target="_blank" rel="noopener" data-reveal data-delay="2" data-testid="contact-instagram-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg>
+            <h3>Instagram</h3>
+            <p>@snookerclube_salto<br />Fotos, avisos e resultados</p>
+            <span class="card-link">Seguir o clube</span>
+          </a>
+
+          <a class="contact-card" href="https://www.youtube.com/@kauadasinuquinha" target="_blank" rel="noopener" data-reveal data-delay="3" data-testid="contact-youtube-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none"/></svg>
+            <h3>YouTube</h3>
+            <p>Kauã da Sinuquinha<br />Lives de campeonatos e jogos</p>
+            <span class="card-link">Inscrever-se no canal</span>
+          </a>
+        </div>
+
+        <div class="map-wrap frame" data-reveal data-testid="google-maps-card">
+          <iframe
+            title="Mapa — Snooker Club Salto"
+            src="https://www.google.com/maps?q=Snooker%20Club%20Salto%2C%20Rua%20John%20Kennedy%2C%20379%20-%20Bela%20Vista%2C%20Salto%20-%20SP%2C%2013321-380&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            data-testid="google-maps-embed"
+          ></iframe>
+          <div class="map-bar">
+            <p>Rua John Kennedy, 379 — Bela Vista, Salto/SP · CEP 13321-380</p>
+            <a
+              class="btn btn-gold btn-sm"
+              href="https://www.google.com/maps/dir/?api=1&destination=Snooker%20Club%20Salto%2C%20Rua%20John%20Kennedy%2C%20379%20-%20Bela%20Vista%2C%20Salto%20-%20SP%2C%2013321-380"
+              target="_blank"
+              rel="noopener"
+              data-testid="google-maps-directions-btn"
+            >Traçar rota</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <img src="%PUBLIC_URL%/img/logo-hires.jpg" alt="Snooker Club Salto" class="footer-logo" />
+        <p class="footer-slogan">“O maior clube de Snooker da região”</p>
+        <nav class="footer-links">
+          <a href="#clube">O Clube</a>
+          <a href="#campeonatos">Campeonatos</a>
+          <a href="#lives">Lives</a>
+          <a href="#horarios">Horários</a>
+          <a href="inscricao.html">Inscrição</a>
+          <a href="admin.html" data-testid="footer-admin-link">Área do clube</a>
+        </nav>
+        <p class="footer-copy">© <span data-ano></span> Snooker Club Salto · Rua John Kennedy, 379 — Salto/SP</p>
+      </div>
+    </footer>
+
+    <!-- ===== WHATSAPP FLUTUANTE ===== -->
+    <a
+      class="wa-fab"
+      href="https://wa.me/5511985157388?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Snooker%20Club%20Salto."
+      target="_blank"
+      rel="noopener"
+      aria-label="Falar no WhatsApp"
+      data-testid="floating-whatsapp-btn"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2Zm0 18.02c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24s-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
+    </a>
+
+    <div id="root"></div>
+    <script src="%PUBLIC_URL%/js/site.js"></script>
+  </body>
+</html>
