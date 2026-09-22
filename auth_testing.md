@@ -14,7 +14,7 @@ para senha única de administração, sem contas de usuário):
 API_URL=https://salto-snooker.preview.emergentagent.com
 
 # 1. Login correto
-curl -s -X POST "$API_URL/api/admin/login" -H "x-admin-password: SnookerSalto2026"
+curl -s -X POST "$API_URL/api/admin/login" -H "x-admin-password: FlavioSnoocker2026"
 # esperado: {"ok":true}
 
 # 2. Login errado (deve dar 401)
@@ -25,13 +25,13 @@ curl -s -o /dev/null -w "%{http_code}" -X POST "$API_URL/api/admin/login" -H "x-
 curl -s "$API_URL/api/campeonatos"
 
 # 4. Criar campeonato (admin)
-curl -s -X POST "$API_URL/api/admin/campeonatos" -H "x-admin-password: SnookerSalto2026" \
+curl -s -X POST "$API_URL/api/admin/campeonatos" -H "x-admin-password: FlavioSnoocker2026" \
   -H "Content-Type: application/json" -d '{"title":"Copa Teste"}'
 
 # 5. Registrar inscrição (público) e ler no painel
 curl -s -X POST "$API_URL/api/inscricoes" -H "Content-Type: application/json" \
   -d '{"modalidade":"Um time","nome":"Dupla Teste","idade":25,"sexo":"Masculino","campeonato":"Copa Teste","telefone":"11999999999","cidade":"Salto/SP"}'
-curl -s "$API_URL/api/admin/inscricoes" -H "x-admin-password: SnookerSalto2026"
+curl -s "$API_URL/api/admin/inscricoes" -H "x-admin-password: FlavioSnoocker2026"
 ```
 
 Credenciais em `/app/memory/test_credentials.md`.
