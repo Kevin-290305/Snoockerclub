@@ -236,6 +236,7 @@
         </div>
 
         <div class="champ-grid">
+          <div class="champ-list" id="champ-list" data-testid="championship-list">
           <!-- Para adicionar um novo campeonato, copie este bloco "champ-card" e troque os textos -->
           <article class="champ-card" data-reveal data-testid="championship-card-item">
             <div class="champ-top">
@@ -259,6 +260,7 @@
             </ul>
             <a class="btn btn-gold btn-block" href="inscricao.html" data-testid="championship-register-btn">Escrever meu time / me inscrever</a>
           </article>
+          </div>
 
           <aside class="champ-side" data-reveal data-delay="1">
             <h3>Como funciona</h3>
@@ -364,6 +366,27 @@
             <span class="card-link">Inscrever-se no canal</span>
           </a>
         </div>
+
+        <div class="map-wrap frame" data-reveal data-testid="google-maps-card">
+          <iframe
+            title="Mapa — Snooker Club Salto"
+            src="https://www.google.com/maps?q=Snooker%20Club%20Salto%2C%20Rua%20John%20Kennedy%2C%20379%20-%20Bela%20Vista%2C%20Salto%20-%20SP%2C%2013321-380&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            data-testid="google-maps-embed"
+          ></iframe>
+          <div class="map-bar">
+            <p>Rua John Kennedy, 379 — Bela Vista, Salto/SP · CEP 13321-380</p>
+            <a
+              class="btn btn-gold btn-sm"
+              href="https://www.google.com/maps/dir/?api=1&destination=Snooker%20Club%20Salto%2C%20Rua%20John%20Kennedy%2C%20379%20-%20Bela%20Vista%2C%20Salto%20-%20SP%2C%2013321-380"
+              target="_blank"
+              rel="noopener"
+              data-testid="google-maps-directions-btn"
+            >Traçar rota</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -378,6 +401,7 @@
           <a href="#lives">Lives</a>
           <a href="#horarios">Horários</a>
           <a href="inscricao.html">Inscrição</a>
+          <a href="admin.html" data-testid="footer-admin-link">Área do clube</a>
         </nav>
         <p class="footer-copy">© <span data-ano></span> Snooker Club Salto · Rua John Kennedy, 379 — Salto/SP</p>
       </div>
