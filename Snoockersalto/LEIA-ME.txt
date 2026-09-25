@@ -23,6 +23,20 @@ COMO EDITAR
   (e confira se o js/site.js continua batendo com os horários)
 - Para mudar cores: abra css/style.css e edite o bloco ":root" no topo
 
+COMO RODAR NO SEU COMPUTADOR (teste local completo)
+----------------------------------------------------
+1. Instale o Python 3 no seu computador (python.org)
+2. Abra o terminal DENTRO da pasta "backend" desta pasta e rode:
+       pip install -r requirements.txt
+3. Ainda no terminal, inicie o site + painel:
+       uvicorn server:app --host 0.0.0.0 --port 8001
+4. Abra no navegador: http://localhost:8001
+   - O painel fica em: http://localhost:8001/admin.html
+   - Senha do painel: a que estiver em backend/.env (ADMIN_PASSWORD)
+5. Para SALVAR campeonatos localmente é preciso ter o MongoDB ligado na
+   máquina (ou usar o Atlas: troque a MONGO_URL no backend/.env).
+   Sem banco, o site abre e o WhatsApp funciona — só não salva cadastros.
+
 IMPORTANTE
 ----------
 - As pastas "css", "js" e "img" precisam ficar ao lado dos arquivos

@@ -36,6 +36,7 @@ Criar um site profissional e interativo para o Snooker Club Salto (Salto/SP), ma
 - 2026-09-22: Dados de exemplo no banco (removíveis pelo painel): campeonatos "Campeonato de Sinuca — Snooker Club Salto" (seed automático) e "Copa Kauã da Sinuquinha" (criado em teste); 0 inscrições.
 - 2026-09-22: Senha do painel trocada pelo usuário para FlavioSnoocker2026 (responsável: Flavio) — antiga invalidada (401), nova validada; seção "Campeonatos publicados" no painel agora rotulada deixando claro o botão Excluir por campeonato; pasta Snoockersalto + zip atualizados.
 - 2026-09-22: Olhinho para mostrar/ocultar a senha no portão do painel (/admin.html) — testado: alterna password↔text e volta; pasta Snoockersalto + zip atualizados.
+- 2026-09-25: Revisão dos arquivos enviados pelo usuário (local): .env correto (FlavioSnoocker2026), admin/inscricao/pytest ok, index local com 4 fotos da galeria com src/alt trocados (correção instruída ao usuário). Causa do "senha incorreta" local: sem backend rodando. Melhorias: backend tolerante a MongoDB ausente no seed, backend serve o site estático na porta 8001 (uma só porta no teste local), mensagem de erro do portão diferencia senha errada × servidor ausente, Snoockersalto/backend + LEIA-ME com passo a passo local. Preview validado: login FlavioSnoocker2026 = 200; senha errada = 401 com mensagem explicativa.
 
 ## Backlog
 - P1: Backend (FastAPI + Mongo) para campeonatos dinâmicos + painel admin protegido por senha (hoje os campeonatos são um bloco HTML fácil de editar, marcado com comentário).

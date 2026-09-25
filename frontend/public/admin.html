@@ -45,6 +45,9 @@
             </div>
             <button type="submit" class="btn btn-gold btn-block" data-testid="admin-login-submit-btn">Entrar no painel</button>
             <p class="form-error" id="gate-erro" data-testid="admin-login-error" hidden>Senha incorreta. Tente novamente.</p>
+            <p class="admin-item-meta" style="margin-top: 14px">
+              A senha do painel fica guardada no arquivo <strong>backend/.env</strong>, na linha ADMIN_PASSWORD.
+            </p>
           </form>
         </section>
 
@@ -200,14 +203,29 @@
           pw = document.getElementById("admin-password").value;
           fetch("/api/admin/login", { method: "POST", headers: headers() })
             .then(function (r) {
-              if (!r.ok) throw new Error();
+              if (r.status === 401) {
+                mostrarErro("Senha incorreta. Tente novamente — a senha atual está no arquivo backend/.env (linha ADMIN_PASSWORD).");
+                return;
+              }
+              if (!r.ok) {
+                mostrarErro("O servidor respondeu com erro " + r.status + ". Tente novamente em instantes.");
+                return;
+              }
               sessionStorage.setItem("scs_admin", pw);
               abrirPainel();
             })
             .catch(function () {
-              document.getElementById("gate-erro").hidden = false;
+              mostrarErro(
+                "Não encontrei o servidor do clube neste endereço. Se você abriu o arquivo direto do computador, rode o backend (passo a passo no LEIA-ME.txt) e acesse http://localhost:8001/admin.html — ou teste pelo preview do projeto."
+              );
             });
         });
+
+        function mostrarErro(msg) {
+          var el = document.getElementById("gate-erro");
+          el.textContent = msg;
+          el.hidden = false;
+        }
 
         function abrirPainel() {
           document.getElementById("gate").hidden = true;
