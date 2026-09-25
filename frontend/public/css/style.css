@@ -1354,8 +1354,6 @@ section[id] { scroll-margin-top: 96px; }
   font-size: 0.88rem;
 }
 .admin-empty { color: var(--muted); font-size: 0.9rem; font-style: italic; padding: 14px 2px; }
-<<<<<<< HEAD
-=======
 
 /* ---------- Olhinho da senha ---------- */
 .pass-wrap { position: relative; }
@@ -1377,7 +1375,6 @@ section[id] { scroll-margin-top: 96px; }
 }
 .pass-toggle:hover { opacity: 1; color: var(--brass-light); }
 .pass-toggle svg { width: 20px; height: 20px; }
->>>>>>> master
 @media (max-width: 720px) {
   .admin-section { padding: 26px 20px; }
   .map-wrap iframe { height: 280px; }
