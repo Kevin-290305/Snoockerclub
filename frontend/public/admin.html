@@ -58,9 +58,9 @@
             <button class="btn btn-ghost btn-sm" id="btn-sair" data-testid="admin-logout-btn">Sair</button>
           </div>
 
-          <!-- Campeonatos -->
-          <section class="form-card admin-section" data-testid="admin-championships-section">
-            <h2>Campeonatos</h2>
+          <!-- Gerador de campeonatos (sem banco de dados) -->
+          <section class="form-card admin-section" data-testid="admin-generator-section">
+            <h2>Criar campeonato</h2>
             <form id="form-champ">
               <div class="field">
                 <label for="c-title">Título do campeonato</label>
@@ -68,7 +68,7 @@
               </div>
               <div class="field-row">
                 <div class="field">
-                  <label for="c-date">Data (texto livre)</label>
+                  <label for="c-date">Data</label>
                   <input type="text" id="c-date" placeholder="Ex.: 18/10 · sábado, a partir das 14h" data-testid="input-admin-date" />
                 </div>
                 <div class="field">
@@ -86,68 +86,55 @@
                   <input type="text" id="c-details" placeholder="Ex.: inscrições até 15/10" data-testid="input-admin-details" />
                 </div>
               </div>
-              <button type="submit" class="btn btn-gold btn-block" data-testid="admin-create-championship-btn">Publicar campeonato</button>
+              <button type="submit" class="btn btn-gold btn-block" data-testid="admin-generate-btn">Gerar código do campeonato</button>
             </form>
-            <div style="margin-top: 26px">
-              <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: 14px">
-                Campeonatos publicados <span style="font-family: var(--font-sans); font-size: 0.8rem; color: var(--muted); font-weight: 400">— cada um tem botões de encerrar e de excluir</span>
-              </h3>
-              <div id="admin-champ-list" data-testid="admin-championships-list"></div>
+
+            <div id="gerado" hidden data-testid="admin-generated-box">
+              <p class="admin-item-meta" style="margin-top: 20px">
+                <strong>1.</strong> Copie o código abaixo · <strong>2.</strong> Abra o arquivo
+                <strong>js/campeonatos.js</strong> no seu projeto · <strong>3.</strong> Apague tudo, cole o código e salve ·
+                <strong>4.</strong> Publique o site (deploy) — o campeonato aparece na hora.
+              </p>
+              <textarea id="codigo-gerado" rows="14" style="width: 100%; margin-top: 12px; font-family: monospace; font-size: 0.8rem" data-testid="admin-generated-code"></textarea>
+              <button class="btn btn-gold btn-block" id="btn-copiar" data-testid="admin-copy-btn" style="margin-top: 12px">Copiar código</button>
+              <p class="form-msg" id="copiado" hidden data-testid="admin-copy-ok" style="margin-top: 12px">Código copiado! Cole no arquivo js/campeonatos.js, salve e publique o site.</p>
             </div>
           </section>
 
-          <!-- Inscrições -->
-          <section class="form-card admin-section" data-testid="admin-inscriptions-section">
-            <h2>Inscrições recebidas</h2>
+          <!-- Campeonatos já publicados -->
+          <section class="form-card admin-section" data-testid="admin-current-section">
+            <h2>Campeonatos publicados agora</h2>
             <p class="admin-item-meta" style="margin-bottom: 16px">
-              As inscrições também chegam direto no WhatsApp do clube — aqui fica o registro de tudo o que veio pelo site.
+              Esta é a lista que está no ar — vem do arquivo js/campeonatos.js. Para mudar, gere um código novo acima, cole no arquivo e publique.
             </p>
-            <div id="admin-insc-list" data-testid="admin-inscriptions-list"></div>
+            <div id="lista-atual" data-testid="admin-current-list"></div>
           </section>
         </section>
       </div>
     </main>
 
+    <script src="js/campeonatos.js"></script>
     <script>
       (function () {
         "use strict";
-        var pw = sessionStorage.getItem("scs_admin") || "";
+
+        /* Senha do painel (gravada em código Base64).
+           Para trocar a senha, substitua o texto entre aspas pelo
+           código Base64 da senha nova. */
+        var SENHA_CODIFICADA = "RmxhdmlvU25vb2NrZXIyMDI2";
 
         function esc(t) {
           var d = document.createElement("div");
           d.textContent = t == null ? "" : String(t);
           return d.innerHTML;
         }
-        function headers() {
-          return { "x-admin-password": pw, "Content-Type": "application/json" };
-        }
-        function fmtData(iso) {
-          try {
-            return new Date(iso).toLocaleDateString("pt-BR");
-          } catch (e) {
-            return "";
-          }
-        }
-        function waLink(fone) {
-          var d = String(fone || "").replace(/\D/g, "");
-          if (d.length <= 11) d = "55" + d;
-          return "https://wa.me/" + d;
-        }
 
-        function carregar() {
-          Promise.all([
-            fetch("/api/admin/campeonatos", { headers: headers() }),
-            fetch("/api/admin/inscricoes", { headers: headers() }),
-          ])
-            .then(function (rs) { return Promise.all(rs.map(function (r) { return r.json(); })); })
-            .then(function (data) { renderChamps(data[0] || []); renderInscs(data[1] || []); })
-            .catch(function () {});
-        }
-
-        function renderChamps(items) {
-          var box = document.getElementById("admin-champ-list");
+        function renderAtual() {
+          var box = document.getElementById("lista-atual");
+          if (!box) return;
+          var items = Array.isArray(window.CAMPEONATOS) ? window.CAMPEONATOS : [];
           if (!items.length) {
-            box.innerHTML = '<p class="admin-empty" data-testid="admin-empty-champs">Nenhum campeonato cadastrado ainda.</p>';
+            box.innerHTML = '<p class="admin-empty" data-testid="admin-empty-champs">Nenhum campeonato publicado ainda.</p>';
             return;
           }
           box.innerHTML = items
@@ -158,62 +145,28 @@
                     "<h3>" + esc(c.title) + "</h3>" +
                     '<p class="admin-item-meta">' + esc(c.date) + " · " + esc(c.format || "Formato a definir") + " · " + esc(c.prize || "Premiação a definir") + "</p>" +
                   "</div>" +
-                  '<div class="admin-item-actions">' +
-                    '<span class="badge ' + (c.registration_open ? "badge-open" : "badge-closed") + '" data-testid="admin-champ-status"><span class="dot"></span>' + (c.registration_open ? "Aberto" : "Encerrado") + "</span>" +
-                    '<button class="btn btn-ghost btn-mini" data-action="toggle" data-id="' + esc(c.id) + '" data-testid="admin-toggle-btn">' + (c.registration_open ? "Encerrar inscrições" : "Reabrir inscrições") + "</button>" +
-                    '<button class="btn btn-danger btn-mini" data-action="delete" data-id="' + esc(c.id) + '" data-testid="admin-delete-btn">Excluir</button>' +
-                  "</div>" +
                 "</div>"
               );
             })
             .join("");
         }
 
-        function renderInscs(items) {
-          var box = document.getElementById("admin-insc-list");
-          if (!items.length) {
-            box.innerHTML = '<p class="admin-empty" data-testid="admin-empty-insc">Nenhuma inscrição recebida pelo site ainda.</p>';
-            return;
-          }
-          box.innerHTML = items
-            .map(function (r) {
-              return (
-                '<div class="admin-item" data-testid="admin-inscription-item">' +
-                  '<div style="flex:1;min-width:200px">' +
-                    "<h3>" + esc(r.nome) + ' <span class="tag">' + esc(r.modalidade) + "</span></h3>" +
-                    '<p class="admin-item-meta">' + esc(r.idade) + " anos · " + esc(r.sexo) + " · " + esc(r.cidade) + " · recebida em " + fmtData(r.created_at) + "</p>" +
-                    '<p class="admin-item-meta">Campeonato: ' + esc(r.campeonato) + (r.obs ? " — Obs: " + esc(r.obs) : "") + "</p>" +
-                  "</div>" +
-                  '<div class="admin-item-actions">' +
-                    '<a class="btn btn-ghost btn-mini" href="' + waLink(r.telefone) + '" target="_blank" rel="noopener" data-testid="admin-insc-whatsapp">Responder no WhatsApp</a>' +
-                    '<button class="btn btn-danger btn-mini" data-action="delete-insc" data-id="' + esc(r.id) + '" data-testid="admin-insc-delete">Excluir</button>' +
-                  "</div>" +
-                "</div>"
-              );
-            })
-            .join("");
+        function gerarCodigo(lista) {
+          return "window.CAMPEONATOS = " + JSON.stringify(lista, null, 2) + ";";
         }
 
-        // Portão
+        // Portão (verificação feita no próprio navegador — sem servidor)
         document.getElementById("gate-form").addEventListener("submit", function (e) {
           e.preventDefault();
-          pw = document.getElementById("admin-password").value;
-          fetch("/api/admin/login", { method: "POST", headers: headers() })
-            .then(function (r) {
-              if (r.status === 401) {
-                mostrarErro("Senha incorreta. Tente novamente.");
-                return;
-              }
-              if (!r.ok) {
-                mostrarErro("Ocorreu um erro no servidor. Tente novamente em instantes.");
-                return;
-              }
-              sessionStorage.setItem("scs_admin", pw);
-              abrirPainel();
-            })
-            .catch(function () {
-              mostrarErro("Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.");
-            });
+          var digitada = document.getElementById("admin-password").value;
+          var correta = "";
+          try { correta = atob(SENHA_CODIFICADA); } catch (err) { correta = ""; }
+          if (correta !== "" && digitada === correta) {
+            sessionStorage.setItem("scs_admin", "ok");
+            abrirPainel();
+          } else {
+            mostrarErro("Senha incorreta. Tente novamente.");
+          }
         });
 
         function mostrarErro(msg) {
@@ -226,52 +179,47 @@
           document.getElementById("gate").hidden = true;
           document.getElementById("panel").hidden = false;
           document.getElementById("gate-erro").hidden = true;
-          carregar();
+          renderAtual();
         }
 
         document.getElementById("btn-sair").addEventListener("click", function () {
           sessionStorage.removeItem("scs_admin");
-          pw = "";
           document.getElementById("panel").hidden = true;
           document.getElementById("gate").hidden = false;
           document.getElementById("admin-password").value = "";
         });
 
-        // Publicar campeonato
+        // Gerar o código do campeonato (para colar em js/campeonatos.js)
         document.getElementById("form-champ").addEventListener("submit", function (e) {
           e.preventDefault();
-          var corpo = {
+          var lista = Array.isArray(window.CAMPEONATOS) ? window.CAMPEONATOS.slice() : [];
+          lista.unshift({
             title: document.getElementById("c-title").value,
             date: document.getElementById("c-date").value || "Data a confirmar",
             format: document.getElementById("c-format").value,
             prize: document.getElementById("c-prize").value,
-            details: document.getElementById("c-details").value,
-          };
-          fetch("/api/admin/campeonatos", { method: "POST", headers: headers(), body: JSON.stringify(corpo) })
-            .then(function (r) { return r.json(); })
-            .then(function () {
-              document.getElementById("form-champ").reset();
-              carregar();
-            });
+            details: document.getElementById("c-details").value || "",
+          });
+          var caixa = document.getElementById("codigo-gerado");
+          caixa.value = gerarCodigo(lista);
+          document.getElementById("gerado").hidden = false;
+          document.getElementById("copiado").hidden = true;
+          caixa.scrollIntoView({ behavior: "smooth", block: "center" });
         });
 
-        // Ações da lista
-        document.addEventListener("click", function (e) {
-          var btn = e.target.closest("[data-action]");
-          if (!btn) return;
-          var id = btn.getAttribute("data-id");
-          if (btn.getAttribute("data-action") === "toggle") {
-            fetch("/api/admin/campeonatos/" + id, { method: "PATCH", headers: headers() }).then(carregar);
-          }
-          if (btn.getAttribute("data-action") === "delete") {
-            if (confirm("Excluir este campeonato?")) {
-              fetch("/api/admin/campeonatos/" + id, { method: "DELETE", headers: headers() }).then(carregar);
-            }
-          }
-          if (btn.getAttribute("data-action") === "delete-insc") {
-            if (confirm("Excluir esta inscrição do painel? (O registro não volta — ela também chegou no WhatsApp do clube.)")) {
-              fetch("/api/admin/inscricoes/" + id, { method: "DELETE", headers: headers() }).then(carregar);
-            }
+        // Copiar o código gerado
+        document.getElementById("btn-copiar").addEventListener("click", function () {
+          var caixa = document.getElementById("codigo-gerado");
+          caixa.select();
+          caixa.setSelectionRange(0, 99999);
+          var aviso = function () {
+            document.getElementById("copiado").hidden = false;
+          };
+          try {
+            if (document.execCommand("copy")) { aviso(); return; }
+          } catch (err) {}
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(caixa.value).then(aviso).catch(aviso);
           }
         });
 
@@ -289,14 +237,7 @@
         });
 
         // Sessão salva
-        if (pw) {
-          fetch("/api/admin/login", { method: "POST", headers: headers() })
-            .then(function (r) {
-              if (r.ok) abrirPainel();
-              else sessionStorage.removeItem("scs_admin");
-            })
-            .catch(function () {});
-        }
+        if (sessionStorage.getItem("scs_admin") === "ok") abrirPainel();
       })();
     </script>
   </body>

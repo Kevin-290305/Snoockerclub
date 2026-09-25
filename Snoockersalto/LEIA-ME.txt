@@ -1,68 +1,49 @@
 SNOOKER CLUB SALTO — ARQUIVOS DO SITE
 ======================================
 
-Esta pasta contém TODOS os arquivos do site (versão limpa e organizada).
-Pode hospedar em qualquer lugar (Hostinger, GoDaddy, Netlify, Vercel etc.)
-ou simplesmente abrir o index.html no navegador.
+Esta pasta contém TODOS os arquivos do site. Não usa banco de dados,
+não precisa de servidor — pode hospedar em qualquer lugar (Vercel,
+Netlify, Hostinger…) ou abrir o index.html direto no navegador.
 
 O QUE É CADA COISA
 ------------------
 index.html ......... A página principal do site (o site inteiro está aqui)
 inscricao.html ..... A página da ficha de inscrição em campeonatos
+admin.html ......... O painel do clube (protegido por senha) que gera
+                     o código dos campeonatos
 css/style.css ...... A aparência do site inteiro (cores, tamanhos, responsivo)
+js/campeonatos.js .. A LISTA DE CAMPEONATOS que aparece no site (edite aqui)
 js/site.js ......... O código do botão de WhatsApp, do selo
                      "Aberto agora/Fechado agora" e das animações
 img/logo-hires.jpg . A logo do clube em alta qualidade
 img/clube-*.jpg .... As 4 fotos reais do clube
 
-COMO EDITAR
------------
-- Para trocar um campeonato: abra index.html, procure por
-  "champ-card" (tem um comentário ensinando a copiar o bloco)
-- Para mudar horários: abra index.html e procure "hours-list"
-  (e confira se o js/site.js continua batendo com os horários)
-- Para mudar cores: abra css/style.css e edite o bloco ":root" no topo
+COMO PUBLICAR UM CAMPEONATO (sem mexer em código complicado)
+-------------------------------------------------------------
+1. Abra admin.html e entre com a senha do painel
+2. Preencha o formulário e clique em "Gerar código do campeonato"
+3. Clique em "Copiar código"
+4. Abra o arquivo js/campeonatos.js no seu projeto, apague tudo,
+   cole o código copiado e salve
+5. Publique o site (deploy) — o campeonato já aparece na página
 
-COMO RODAR NO SEU COMPUTADOR (teste local completo)
-----------------------------------------------------
-1. Instale o Python 3 no seu computador (python.org)
-2. Abra o terminal DENTRO da pasta "backend" desta pasta e rode:
-       pip install -r requirements.txt
-3. Ainda no terminal, inicie o site + painel:
-       uvicorn server:app --host 0.0.0.0 --port 8001
-4. Abra no navegador: http://localhost:8001
-   - O painel fica em: http://localhost:8001/admin.html
-   - Senha do painel: a que estiver em backend/.env (ADMIN_PASSWORD)
-5. Para SALVAR campeonatos localmente é preciso ter o MongoDB ligado na
-   máquina (ou usar o Atlas: troque a MONGO_URL no backend/.env).
-   Sem banco, o site abre e o WhatsApp funciona — só não salva cadastros.
+Para remover um campeonato: apague o bloco { ... } dele dentro do
+arquivo js/campeonatos.js, salve e publique de novo.
 
-COMO PUBLICAR NA VERCEL (com a senha e os campeonatos funcionando)
--------------------------------------------------------------------
-A Vercel roda a parte visual do site; quem confere a senha e salva os
-campeonatos são as funções da pasta "api" (já incluída nesta pasta).
-Para tudo funcionar lá:
+COMO TROCAR A SENHA DO PAINEL
+------------------------------
+A senha fica gravada dentro do admin.html em código secreto (Base64).
+Peça para gerar o código da senha nova e substitua a linha
+SENHA_CODIFICADA = "..." no admin.html. Ou simplesmente me peça que eu troco.
 
-1. Banco de dados grátis: crie uma conta no MongoDB Atlas
-   (mongodb.com/atlas) → crie o cluster gratuito → crie um usuário e
-   senha → em "Network Access" libere o acesso "0.0.0.0/0" (Anywhere)
-   → copie a string de conexão (parece mongodb+srv://usuario:senha@...)
-2. Na Vercel, abra seu projeto → Settings → Environment Variables e
-   adicione as 3 variáveis:
-       MONGO_URL      = a string de conexão do Atlas
-       DB_NAME        = snooker
-       ADMIN_PASSWORD = FlavioSnoocker2026 (ou a senha que preferir)
-3. Faça o deploy enviando TODO o conteúdo desta pasta (index.html,
-   inscricao.html, admin.html, css/, js/, img/, api/, requirements.txt
-   e vercel.json) — a pasta "api" é obrigatória: é ela que faz a senha
-   e os campeonatos funcionarem na Vercel.
-4. Depois do deploy, teste: seusite.vercel.app/admin.html
-   - Se aparecer "Não encontrei o servidor do clube": as variáveis do
-     passo 2 não foram salvas, ou a pasta api ficou fora do deploy.
+COMO PUBLICAR NA VERCEL
+------------------------
+1. Acesse vercel.com → "Add New" → "Project" e envie esta pasta
+   (ou envie os arquivos para o seu GitHub e importe o repositório)
+2. NÃO precisa configurar variáveis de ambiente nem banco de dados
+3. Depois do deploy, o painel fica em seudominio.com/admin.html
 
-IMPORTANTE
-----------
-- As pastas "css", "js" e "img" precisam ficar ao lado dos arquivos
-  index.html e inscricao.html, com esses mesmos nomes
-- O WhatsApp das inscrições vai para +55 11 98515-7388
-  (para trocar o número, procure por "wa.me/5511985157388" nos arquivos)
+COMO TESTAR NO SEU COMPUTADOR
+------------------------------
+Só abrir o arquivo index.html com dois cliques — funciona direto,
+inclusive o painel e a inscrição pelo WhatsApp.

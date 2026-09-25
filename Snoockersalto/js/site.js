@@ -87,22 +87,6 @@
         "https://wa.me/5511985157388?text=" + encodeURIComponent(linhas.join("\n"));
       window.open(url, "_blank", "noopener");
 
-      /* Guarda a inscrição no painel do clube (melhor esforço — não bloqueia o WhatsApp) */
-      fetch("/api/inscricoes", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          modalidade: dados.get("modalidade"),
-          nome: dados.get("nome"),
-          idade: Number(dados.get("idade")),
-          sexo: dados.get("sexo"),
-          campeonato: dados.get("campeonato"),
-          telefone: dados.get("telefone"),
-          cidade: dados.get("cidade"),
-          obs: dados.get("obs") || "",
-        }),
-      }).catch(function () {});
-
       var ok = document.getElementById("form-sucesso");
       if (ok) ok.hidden = false;
       form.querySelector("[data-testid='submit-register-whatsapp-btn']").textContent =
@@ -148,57 +132,44 @@
   function carregarCampeonatos() {
     var lista = document.getElementById("champ-list");
     if (!lista) return;
-    fetch("/api/campeonatos")
-      .then(function (r) { return r.json(); })
-      .then(function (items) {
-        if (!Array.isArray(items)) return;
-        if (!items.length) {
-          lista.innerHTML =
-            '<div class="champ-empty" data-testid="championship-empty">' +
-              "<h3>Nenhum campeonato aberto no momento</h3>" +
-              "<p>Novos torneios são anunciados aqui, no Instagram do clube e no WhatsApp. Quer garantir vaga no próximo? Fale com a gente.</p>" +
-              '<a class="btn btn-ghost" href="https://wa.me/5511985157388?text=' + encodeURIComponent("Olá! Quero saber quando abre o próximo campeonato do Snooker Club Salto.") + '" target="_blank" rel="noopener" data-testid="championship-waitlist-btn">Avisem-me do próximo</a>' +
-            "</div>";
-        } else {
-          lista.innerHTML = items.map(cardCampeonato).join("");
-        }
-      })
-      .catch(function () {
-        /* sem conexão com a API: mantém o bloco estático */
-      });
+    var items = Array.isArray(window.CAMPEONATOS) ? window.CAMPEONATOS : [];
+    if (!items.length) {
+      lista.innerHTML =
+        '<div class="champ-empty" data-testid="championship-empty">' +
+          "<h3>Nenhum campeonato aberto no momento</h3>" +
+          "<p>Novos torneios são anunciados aqui, no Instagram do clube e no WhatsApp. Quer garantir vaga no próximo? Fale com a gente.</p>" +
+          '<a class="btn btn-ghost" href="https://wa.me/5511985157388?text=' + encodeURIComponent("Olá! Quero saber quando abre o próximo campeonato do Snooker Club Salto.") + '" target="_blank" rel="noopener" data-testid="championship-waitlist-btn">Avisem-me do próximo</a>' +
+        "</div>";
+    } else {
+      lista.innerHTML = items.map(cardCampeonato).join("");
+    }
   }
   carregarCampeonatos();
 
   /* ---------- Opções de campeonato na ficha de inscrição ---------- */
   var selCamp = document.getElementById("f-campeonato");
   if (selCamp) {
-    fetch("/api/campeonatos")
-      .then(function (r) { return r.json(); })
-      .then(function (items) {
-        if (!Array.isArray(items) || !items.length) return;
-        var aviso = selCamp.options[selCamp.options.length - 1].value || "Ainda não sei — quero ser avisado do próximo";
-        selCamp.innerHTML = '<option value="" disabled selected>Selecione o campeonato</option>';
-        items.forEach(function (c) {
-          var o = document.createElement("option");
-          o.value = c.title;
-          o.textContent = c.title;
-          selCamp.appendChild(o);
-        });
-        var oAviso = document.createElement("option");
-        oAviso.value = aviso;
-        oAviso.textContent = aviso;
-        selCamp.appendChild(oAviso);
+    var itens = Array.isArray(window.CAMPEONATOS) ? window.CAMPEONATOS : [];
+    selCamp.innerHTML = '<option value="" disabled selected>Selecione o campeonato</option>';
+    itens.forEach(function (c) {
+      var o = document.createElement("option");
+      o.value = c.title;
+      o.textContent = c.title;
+      selCamp.appendChild(o);
+    });
+    var oAviso = document.createElement("option");
+    oAviso.value = "Ainda não sei — quero ser avisado do próximo";
+    oAviso.textContent = oAviso.value;
+    selCamp.appendChild(oAviso);
 
-        var pre = new URLSearchParams(location.search).get("campeonato");
-        if (pre) {
-          for (var i = 0; i < selCamp.options.length; i++) {
-            if (selCamp.options[i].value === pre) {
-              selCamp.value = pre;
-              break;
-            }
-          }
+    var pre = new URLSearchParams(location.search).get("campeonato");
+    if (pre) {
+      for (var i = 0; i < selCamp.options.length; i++) {
+        if (selCamp.options[i].value === pre) {
+          selCamp.value = pre;
+          break;
         }
-      })
-      .catch(function () {});
+      }
+    }
   }
 })();
