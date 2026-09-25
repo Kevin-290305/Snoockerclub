@@ -1,4 +1,5 @@
 from fastapi import FastAPI, APIRouter, HTTPException, Request
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -200,16 +201,19 @@ async def admin_delete_inscricao(item_id: str, request: Request):
 
 @app.on_event("startup")
 async def seed_campeonatos():
-    if await db.campeonatos.count_documents({}) == 0:
-        camp = Championship(
-            title="Campeonato de Sinuca — Snooker Club Salto",
-            date="Data a confirmar",
-            format="Individual ou dupla",
-            prize="A definir",
-            details="Novos torneios são anunciados aqui, no Instagram e no WhatsApp do clube.",
-        )
-        await db.campeonatos.insert_one(camp.to_mongo())
-        logger.info("Campeonato de exemplo criado (removível pelo painel)")
+    try:
+        if await db.campeonatos.count_documents({}) == 0:
+            camp = Championship(
+                title="Campeonato de Sinuca — Snooker Club Salto",
+                date="Data a confirmar",
+                format="Individual ou dupla",
+                prize="A definir",
+                details="Novos torneios são anunciados aqui, no Instagram e no WhatsApp do clube.",
+            )
+            await db.campeonatos.insert_one(camp.to_mongo())
+            logger.info("Campeonato de exemplo criado (removível pelo painel)")
+    except Exception as e:
+        logger.warning(f"MongoDB indisponível ao iniciar (o site funciona; salvar campeonatos não): {e}")
 
 
 @app.on_event("shutdown")
@@ -218,6 +222,12 @@ async def shutdown_db_client():
 
 
 app.include_router(api_router)
+
+# Sirve o site (pasta Snoockersalto) na mesma porta da API —
+# permite rodar tudo com um só comando na máquina local.
+SITE_DIR = ROOT_DIR.parent / "Snoockersalto"
+if SITE_DIR.exists():
+    app.mount("/", StaticFiles(directory=str(SITE_DIR), html=True), name="site")
 
 app.add_middleware(
     CORSMiddleware,
