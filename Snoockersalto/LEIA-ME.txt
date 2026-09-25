@@ -37,6 +37,29 @@ COMO RODAR NO SEU COMPUTADOR (teste local completo)
    máquina (ou usar o Atlas: troque a MONGO_URL no backend/.env).
    Sem banco, o site abre e o WhatsApp funciona — só não salva cadastros.
 
+COMO PUBLICAR NA VERCEL (com a senha e os campeonatos funcionando)
+-------------------------------------------------------------------
+A Vercel roda a parte visual do site; quem confere a senha e salva os
+campeonatos são as funções da pasta "api" (já incluída nesta pasta).
+Para tudo funcionar lá:
+
+1. Banco de dados grátis: crie uma conta no MongoDB Atlas
+   (mongodb.com/atlas) → crie o cluster gratuito → crie um usuário e
+   senha → em "Network Access" libere o acesso "0.0.0.0/0" (Anywhere)
+   → copie a string de conexão (parece mongodb+srv://usuario:senha@...)
+2. Na Vercel, abra seu projeto → Settings → Environment Variables e
+   adicione as 3 variáveis:
+       MONGO_URL      = a string de conexão do Atlas
+       DB_NAME        = snooker
+       ADMIN_PASSWORD = FlavioSnoocker2026 (ou a senha que preferir)
+3. Faça o deploy enviando TODO o conteúdo desta pasta (index.html,
+   inscricao.html, admin.html, css/, js/, img/, api/, requirements.txt
+   e vercel.json) — a pasta "api" é obrigatória: é ela que faz a senha
+   e os campeonatos funcionarem na Vercel.
+4. Depois do deploy, teste: seusite.vercel.app/admin.html
+   - Se aparecer "Não encontrei o servidor do clube": as variáveis do
+     passo 2 não foram salvas, ou a pasta api ficou fora do deploy.
+
 IMPORTANTE
 ----------
 - As pastas "css", "js" e "img" precisam ficar ao lado dos arquivos
