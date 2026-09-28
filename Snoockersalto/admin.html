@@ -58,9 +58,10 @@
             <button class="btn btn-ghost btn-sm" id="btn-sair" data-testid="admin-logout-btn">Sair</button>
           </div>
 
-          <!-- Gerador de campeonatos (sem banco de dados) -->
+          <!-- Gerenciador de campeonatos (cria na hora) -->
           <section class="form-card admin-section" data-testid="admin-generator-section">
             <h2>Criar campeonato</h2>
+            <div id="aviso-modo" class="admin-banner" hidden data-testid="admin-mode-banner"></div>
             <form id="form-champ">
               <div class="field">
                 <label for="c-title">Título do campeonato</label>
@@ -86,26 +87,16 @@
                   <input type="text" id="c-details" placeholder="Ex.: inscrições até 15/10" data-testid="input-admin-details" />
                 </div>
               </div>
-              <button type="submit" class="btn btn-gold btn-block" data-testid="admin-generate-btn">Gerar código do campeonato</button>
+              <button type="submit" class="btn btn-gold btn-block" data-testid="admin-create-championship-btn">Criar campeonato agora</button>
             </form>
-
-            <div id="gerado" hidden data-testid="admin-generated-box">
-              <p class="admin-item-meta" style="margin-top: 20px">
-                <strong>1.</strong> Copie o código abaixo · <strong>2.</strong> Abra o arquivo
-                <strong>js/campeonatos.js</strong> no seu projeto · <strong>3.</strong> Apague tudo, cole o código e salve ·
-                <strong>4.</strong> Publique o site (deploy) — o campeonato aparece na hora.
-              </p>
-              <textarea id="codigo-gerado" rows="14" style="width: 100%; margin-top: 12px; font-family: monospace; font-size: 0.8rem" data-testid="admin-generated-code"></textarea>
-              <button class="btn btn-gold btn-block" id="btn-copiar" data-testid="admin-copy-btn" style="margin-top: 12px">Copiar código</button>
-              <p class="form-msg" id="copiado" hidden data-testid="admin-copy-ok" style="margin-top: 12px">Código copiado! Cole no arquivo js/campeonatos.js, salve e publique o site.</p>
-            </div>
           </section>
 
-          <!-- Campeonatos já publicados -->
+          <!-- Campeonatos: pausar / cancelar / excluir na hora -->
           <section class="form-card admin-section" data-testid="admin-current-section">
-            <h2>Campeonatos publicados agora</h2>
+            <h2>Campeonatos</h2>
             <p class="admin-item-meta" style="margin-bottom: 16px">
-              Esta é a lista que está no ar — vem do arquivo js/campeonatos.js. Para mudar, gere um código novo acima, cole no arquivo e publique.
+              Tudo o que você fizer nesta lista vale na hora: <strong style="color: #7ff0b2">em aberto</strong> = inscrições liberadas ·
+              <strong style="color: #ff92a2">fechado</strong> = ninguém consegue se inscrever · cancelado = sai do site.
             </p>
             <div id="lista-atual" data-testid="admin-current-list"></div>
           </section>
@@ -129,21 +120,60 @@
           return d.innerHTML;
         }
 
+        /* Estado dos campeonatos (status: aberto | pausado | cancelado) */
+        var itensAtuais = [];
+        var senhaAdmin = "";
+        var modo = "rascunho";
+
+        function anunciarModo() {
+          var aviso = document.getElementById("aviso-modo");
+          if (!aviso) return;
+          if (modo === "site") {
+            aviso.className = "admin-banner";
+            aviso.innerHTML = "Conectado ao site — tudo o que você fizer aqui aparece na hora para todo mundo.";
+            aviso.hidden = false;
+          } else {
+            aviso.className = "admin-banner erro";
+            aviso.innerHTML =
+              "<strong>Modo rascunho:</strong> as mudanças valem só neste navegador. Para criar valendo no site de todo mundo, " +
+              "conecte o armazenamento grátis da própria Vercel: no painel do projeto na Vercel, abra a aba <strong>Storage</strong> → " +
+              "<strong>Create Blob</strong> → Connect to Project → e publique o site de novo (deploy). Depois é só voltar aqui.";
+            aviso.hidden = false;
+          }
+        }
+
         function renderAtual() {
           var box = document.getElementById("lista-atual");
           if (!box) return;
-          var items = Array.isArray(window.CAMPEONATOS) ? window.CAMPEONATOS : [];
-          if (!items.length) {
+          if (!itensAtuais.length) {
             box.innerHTML = '<p class="admin-empty" data-testid="admin-empty-champs">Nenhum campeonato publicado ainda.</p>';
             return;
           }
-          box.innerHTML = items
-            .map(function (c) {
+          var LIXO =
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m3 0v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6h12Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11v6M14 11v6"/></svg>';
+          box.innerHTML = itensAtuais
+            .map(function (c, i) {
+              var aberto = !c.status || c.status === "aberto";
+              var cancelado = c.status === "cancelado";
               return (
-                '<div class="admin-item" data-testid="admin-championship-item">' +
+                '<div class="admin-item' + (cancelado ? " cancelado" : "") + '" data-testid="admin-championship-item">' +
                   '<div style="flex:1;min-width:200px">' +
-                    "<h3>" + esc(c.title) + "</h3>" +
+                    '<div class="admin-item-top">' +
+                      "<h3>" + esc(c.title) + "</h3>" +
+                      '<button class="trash-btn" data-acao="excluir" data-indice="' + i + '" title="Excluir campeonato" aria-label="Excluir campeonato" data-testid="admin-delete-btn">' + LIXO + "</button>" +
+                    "</div>" +
                     '<p class="admin-item-meta">' + esc(c.date) + " · " + esc(c.format || "Formato a definir") + " · " + esc(c.prize || "Premiação a definir") + "</p>" +
+                    '<span class="status-flag ' + (aberto ? "aberto" : "fechado") + '" data-testid="admin-status-flag">' + (aberto ? "Em aberto" : cancelado ? "Cancelado" : "Fechado") + "</span>" +
+                  "</div>" +
+                  '<div class="admin-item-actions">' +
+                    (aberto
+                      ? '<button class="btn btn-ghost btn-mini" data-acao="pausar" data-indice="' + i + '" data-testid="admin-pause-btn">Pausar inscrições</button>'
+                      : cancelado
+                        ? '<button class="btn btn-ghost btn-mini" data-acao="reativar" data-indice="' + i + '" data-testid="admin-reactivate-btn">Reativar</button>'
+                        : '<button class="btn btn-ghost btn-mini" data-acao="reativar" data-indice="' + i + '" data-testid="admin-reactivate-btn">Reabrir inscrições</button>') +
+                    (cancelado
+                      ? ""
+                      : '<button class="btn btn-danger btn-mini" data-acao="cancelar" data-indice="' + i + '" data-testid="admin-cancel-btn">Cancelar campeonato</button>') +
                   "</div>" +
                 "</div>"
               );
@@ -151,8 +181,52 @@
             .join("");
         }
 
-        function gerarCodigo(lista) {
-          return "window.CAMPEONATOS = " + JSON.stringify(lista, null, 2) + ";";
+        async function salvar() {
+          try {
+            var r = await fetch("/api/admin/save", {
+              method: "POST",
+              headers: { "Content-Type": "application/json", "x-admin-password": senhaAdmin },
+              body: JSON.stringify({ password: senhaAdmin, campeonatos: itensAtuais }),
+            });
+            if (!r.ok) throw new Error();
+            localStorage.removeItem("scs_rascunho");
+            modo = "site";
+            anunciarModo();
+          } catch (e) {
+            if (modo !== "site") {
+              localStorage.setItem("scs_rascunho", JSON.stringify(itensAtuais));
+            } else {
+              modo = "rascunho";
+              anunciarModo();
+              localStorage.setItem("scs_rascunho", JSON.stringify(itensAtuais));
+            }
+          }
+        }
+
+        async function carregarTudo() {
+          try {
+            var r = await fetch("/api/admin/list", { headers: { "x-admin-password": senhaAdmin } });
+            if (!r.ok) throw new Error();
+            var d = await r.json();
+            itensAtuais = Array.isArray(d.campeonatos) ? d.campeonatos : [];
+            modo = "site";
+          } catch (e) {
+            modo = "rascunho";
+            try {
+              var rasc = JSON.parse(localStorage.getItem("scs_rascunho") || "null");
+              itensAtuais = Array.isArray(rasc) ? rasc : window.CAMPEONATOS.slice();
+            } catch (err) {
+              itensAtuais = window.CAMPEONATOS.slice();
+            }
+          }
+          anunciarModo();
+          renderAtual();
+        }
+
+        function mutar(funcao) {
+          funcao(itensAtuais);
+          renderAtual();
+          salvar();
         }
 
         // Portão (verificação feita no próprio navegador — sem servidor)
@@ -162,6 +236,7 @@
           var correta = "";
           try { correta = atob(SENHA_CODIFICADA); } catch (err) { correta = ""; }
           if (correta !== "" && digitada === correta) {
+            senhaAdmin = correta;
             sessionStorage.setItem("scs_admin", "ok");
             abrirPainel();
           } else {
@@ -179,47 +254,63 @@
           document.getElementById("gate").hidden = true;
           document.getElementById("panel").hidden = false;
           document.getElementById("gate-erro").hidden = true;
-          renderAtual();
+          carregarTudo();
         }
 
         document.getElementById("btn-sair").addEventListener("click", function () {
           sessionStorage.removeItem("scs_admin");
+          senhaAdmin = "";
           document.getElementById("panel").hidden = true;
           document.getElementById("gate").hidden = false;
           document.getElementById("admin-password").value = "";
         });
 
-        // Gerar o código do campeonato (para colar em js/campeonatos.js)
+        // Criar campeonato na hora
         document.getElementById("form-champ").addEventListener("submit", function (e) {
           e.preventDefault();
-          var lista = Array.isArray(window.CAMPEONATOS) ? window.CAMPEONATOS.slice() : [];
-          lista.unshift({
+          var novo = {
             title: document.getElementById("c-title").value,
             date: document.getElementById("c-date").value || "Data a confirmar",
             format: document.getElementById("c-format").value,
             prize: document.getElementById("c-prize").value,
             details: document.getElementById("c-details").value || "",
+            status: "aberto",
+          };
+          mutar(function (itens) {
+            itens.unshift(novo);
           });
-          var caixa = document.getElementById("codigo-gerado");
-          caixa.value = gerarCodigo(lista);
-          document.getElementById("gerado").hidden = false;
-          document.getElementById("copiado").hidden = true;
-          caixa.scrollIntoView({ behavior: "smooth", block: "center" });
+          document.getElementById("form-champ").reset();
         });
 
-        // Copiar o código gerado
-        document.getElementById("btn-copiar").addEventListener("click", function () {
-          var caixa = document.getElementById("codigo-gerado");
-          caixa.select();
-          caixa.setSelectionRange(0, 99999);
-          var aviso = function () {
-            document.getElementById("copiado").hidden = false;
-          };
-          try {
-            if (document.execCommand("copy")) { aviso(); return; }
-          } catch (err) {}
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(caixa.value).then(aviso).catch(aviso);
+        // Pausar / reativar / cancelar / excluir — na hora
+        document.addEventListener("click", function (e) {
+          var btn = e.target.closest("[data-acao]");
+          if (!btn) return;
+          var i = Number(btn.getAttribute("data-indice"));
+          var acao = btn.getAttribute("data-acao");
+          if (acao === "pausar") {
+            mutar(function (itens) {
+              if (itens[i]) itens[i].status = "pausado";
+            });
+          }
+          if (acao === "reativar") {
+            mutar(function (itens) {
+              if (itens[i]) itens[i].status = "aberto";
+            });
+          }
+          if (acao === "cancelar") {
+            if (confirm("Cancelar este campeonato? Ele sai do site (dá para reativar depois).")) {
+              mutar(function (itens) {
+                if (itens[i]) itens[i].status = "cancelado";
+              });
+            }
+          }
+          if (acao === "excluir") {
+            if (confirm("Excluir este campeonato para sempre?")) {
+              mutar(function (itens) {
+                itens.splice(i, 1);
+              });
+            }
           }
         });
 

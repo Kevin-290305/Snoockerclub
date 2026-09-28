@@ -35,8 +35,8 @@
   });
 
   document.querySelectorAll("[data-open-badge]").forEach(function (badge) {
-    badge.classList.remove("is-open", "is-closed");
-    badge.classList.add(aberto ? "is-open" : "is-closed");
+    badge.classList.remove("is-open", "is-closed", "badge-open");
+    badge.classList.add(aberto ? "badge-open is-open" : "is-closed");
     badge.innerHTML =
       '<span class="dot"></span>' + (aberto ? "Aberto agora" : "Fechado agora");
   });
@@ -111,10 +111,14 @@
   }
 
   function cardCampeonato(c) {
+    var pausado = c.status === "pausado";
+    var botaoAcao = pausado
+      ? '<a class="btn btn-ghost btn-block" href="https://wa.me/5511985157388?text=' + encodeURIComponent("Olá! Quero saber mais sobre o " + (c.title || "campeonato") + " do Snooker Club Salto.") + '" target="_blank" rel="noopener" data-testid="championship-contact-btn">Falar com o clube no WhatsApp</a>'
+      : '<a class="btn btn-gold btn-block" href="inscricao.html?campeonato=' + encodeURIComponent(c.title) + '" data-testid="championship-register-btn">Inscrever meu time</a>';
     return (
       '<article class="champ-card" data-testid="championship-card-item">' +
         '<div class="champ-top">' +
-          '<span class="badge badge-open" data-testid="championship-status-badge"><span class="dot"></span>Inscrições abertas</span>' +
+          '<span class="badge ' + (pausado ? "is-closed" : "badge-open") + '" data-testid="championship-status-badge"><span class="dot"></span>' + (pausado ? "Inscrições pausadas" : "Inscrições abertas") + "</span>" +
           TROFEU +
         "</div>" +
         "<h3>" + esc(c.title) + "</h3>" +
@@ -124,52 +128,86 @@
           "<li>" + ICO_RELOGIO + '<span><strong>Formato:</strong> ' + esc(c.format || "Consulte pelo WhatsApp") + "</span></li>" +
           "<li>" + ICO_PREMIO + '<span><strong>Premiação:</strong> ' + esc(c.prize || "A definir") + "</span></li>" +
         "</ul>" +
-        '<a class="btn btn-gold btn-block" href="inscricao.html?campeonato=' + encodeURIComponent(c.title) + '" data-testid="championship-register-btn">Escrever meu time / me inscrever</a>' +
+        botaoAcao +
       "</article>"
     );
+  }
+
+  function listaFonte() {
+    return Array.isArray(window.CAMPEONATOS) ? window.CAMPEONATOS.filter(function (c) { return c.status !== "cancelado"; }) : [];
   }
 
   function carregarCampeonatos() {
     var lista = document.getElementById("champ-list");
     if (!lista) return;
-    var items = Array.isArray(window.CAMPEONATOS) ? window.CAMPEONATOS : [];
-    if (!items.length) {
-      lista.innerHTML =
-        '<div class="champ-empty" data-testid="championship-empty">' +
-          "<h3>Nenhum campeonato aberto no momento</h3>" +
-          "<p>Novos torneios são anunciados aqui, no Instagram do clube e no WhatsApp. Quer garantir vaga no próximo? Fale com a gente.</p>" +
-          '<a class="btn btn-ghost" href="https://wa.me/5511985157388?text=' + encodeURIComponent("Olá! Quero saber quando abre o próximo campeonato do Snooker Club Salto.") + '" target="_blank" rel="noopener" data-testid="championship-waitlist-btn">Avisem-me do próximo</a>' +
-        "</div>";
-    } else {
-      lista.innerHTML = items.map(cardCampeonato).join("");
+
+    function render(items) {
+      if (!items.length) {
+        lista.innerHTML =
+          '<div class="champ-empty" data-testid="championship-empty">' +
+            "<h3>Nenhum campeonato aberto no momento</h3>" +
+            "<p>Novos torneios são anunciados aqui, no Instagram do clube e no WhatsApp. Quer garantir vaga no próximo? Fale com a gente.</p>" +
+            '<a class="btn btn-ghost" href="https://wa.me/5511985157388?text=' + encodeURIComponent("Olá! Quero saber quando abre o próximo campeonato do Snooker Club Salto.") + '" target="_blank" rel="noopener" data-testid="championship-waitlist-btn">Avisem-me do próximo</a>' +
+          "</div>";
+      } else {
+        lista.innerHTML = items.map(cardCampeonato).join("");
+      }
     }
+
+    fetch("/api/campeonatos")
+      .then(function (r) {
+        if (!r.ok) throw new Error();
+        return r.json();
+      })
+      .then(function (d) {
+        render(Array.isArray(d.campeonatos) ? d.campeonatos : []);
+      })
+      .catch(function () {
+        var rascunho = null;
+        try { rascunho = JSON.parse(localStorage.getItem("scs_rascunho") || "null"); } catch (err) {}
+        if (Array.isArray(rascunho) && rascunho.length) {
+          render(rascunho.filter(function (c) { return c.status !== "cancelado"; }));
+        } else {
+          render(listaFonte());
+        }
+      });
   }
   carregarCampeonatos();
 
   /* ---------- Opções de campeonato na ficha de inscrição ---------- */
   var selCamp = document.getElementById("f-campeonato");
   if (selCamp) {
-    var itens = Array.isArray(window.CAMPEONATOS) ? window.CAMPEONATOS : [];
-    selCamp.innerHTML = '<option value="" disabled selected>Selecione o campeonato</option>';
-    itens.forEach(function (c) {
-      var o = document.createElement("option");
-      o.value = c.title;
-      o.textContent = c.title;
-      selCamp.appendChild(o);
-    });
-    var oAviso = document.createElement("option");
-    oAviso.value = "Ainda não sei — quero ser avisado do próximo";
-    oAviso.textContent = oAviso.value;
-    selCamp.appendChild(oAviso);
+    function popularSelect(dados) {
+      var itens = (Array.isArray(dados) ? dados : []).filter(function (c) { return c.status !== "pausado" && c.status !== "cancelado"; });
+      if (!itens.length) return;
+      selCamp.innerHTML = '<option value="" disabled selected>Selecione o campeonato</option>';
+      itens.forEach(function (c) {
+        var o = document.createElement("option");
+        o.value = c.title;
+        o.textContent = c.title;
+        selCamp.appendChild(o);
+      });
+      var oAviso = document.createElement("option");
+      oAviso.value = "Ainda não sei — quero ser avisado do próximo";
+      oAviso.textContent = oAviso.value;
+      selCamp.appendChild(oAviso);
 
-    var pre = new URLSearchParams(location.search).get("campeonato");
-    if (pre) {
-      for (var i = 0; i < selCamp.options.length; i++) {
-        if (selCamp.options[i].value === pre) {
-          selCamp.value = pre;
-          break;
+      var pre = new URLSearchParams(location.search).get("campeonato");
+      if (pre) {
+        for (var i = 0; i < selCamp.options.length; i++) {
+          if (selCamp.options[i].value === pre) {
+            selCamp.value = pre;
+            break;
+          }
         }
       }
     }
+    fetch("/api/campeonatos")
+      .then(function (r) {
+        if (!r.ok) throw new Error();
+        return r.json();
+      })
+      .then(function (d) { popularSelect(Array.isArray(d.campeonatos) ? d.campeonatos : []); })
+      .catch(function () { popularSelect(listaFonte()); });
   }
 })();

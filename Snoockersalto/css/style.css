@@ -1357,6 +1357,66 @@ section[id] { scroll-margin-top: 96px; }
 }
 .admin-empty { color: var(--muted); font-size: 0.9rem; font-style: italic; padding: 14px 2px; }
 
+.trash-btn {
+  background: rgba(200, 16, 46, 0.1);
+  border: 1px solid rgba(200, 16, 46, 0.45);
+  color: #ff92a2;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+  flex: none;
+}
+.trash-btn:hover { background: rgba(200, 16, 46, 0.28); transform: translateY(-1px); }
+.trash-btn svg { width: 16px; height: 16px; }
+.admin-item-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.admin-item.cancelado h3 { text-decoration: line-through; opacity: 0.55; }
+.status-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+.status-flag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.status-flag.aberto { color: #7ff0b2; border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.1); }
+.status-flag.fechado { color: #ff92a2; border-color: rgba(200, 16, 46, 0.5); background: rgba(200, 16, 46, 0.12); }
+.admin-banner {
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--brass-light);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.admin-banner.erro {
+  border-color: rgba(200, 16, 46, 0.5);
+  background: rgba(200, 16, 46, 0.1);
+  color: #ff92a2;
+}
+.admin-banner strong { color: inherit; }
+.badge.is-closed {
+  color: #e08694;
+  border-color: rgba(200, 16, 46, 0.4);
+  background: rgba(200, 16, 46, 0.08);
+}
+.badge.is-closed .dot,
+.is-closed .dot {
+  background: var(--crimson);
+  animation: none;
+}
+
 /* ---------- Olhinho da senha ---------- */
 .pass-wrap { position: relative; }
 .pass-wrap input { padding-right: 50px; }

@@ -1,0 +1,7 @@
+{
+  "name": "snooker-club-salto",
+  "private": true,
+  "dependencies": {
+    "@vercel/blob": "latest"
+  }
+}

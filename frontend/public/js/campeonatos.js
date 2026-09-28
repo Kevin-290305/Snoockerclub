@@ -19,6 +19,7 @@ window.CAMPEONATOS = [
     "date": "Data a confirmar",
     "format": "Individual ou dupla",
     "prize": "A definir",
-    "details": "Novos torneios são anunciados aqui, no Instagram e no WhatsApp do clube."
+    "details": "Novos torneios são anunciados aqui, no Instagram e no WhatsApp do clube.",
+    "status": "aberto"
   }
 ];
