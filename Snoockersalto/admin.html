@@ -133,12 +133,7 @@
             aviso.innerHTML = "Conectado ao site — tudo o que você fizer aqui aparece na hora para todo mundo.";
             aviso.hidden = false;
           } else {
-            aviso.className = "admin-banner erro";
-            aviso.innerHTML =
-              "<strong>Modo rascunho:</strong> as mudanças valem só neste navegador. Para criar valendo no site de todo mundo, " +
-              "conecte o armazenamento grátis da própria Vercel: no painel do projeto na Vercel, abra a aba <strong>Storage</strong> → " +
-              "<strong>Create Blob</strong> → Connect to Project → e publique o site de novo (deploy). Depois é só voltar aqui.";
-            aviso.hidden = false;
+            aviso.hidden = true;
           }
         }
 
