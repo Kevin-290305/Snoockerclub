@@ -114,7 +114,7 @@
     var pausado = c.status === "pausado";
     var botaoAcao = pausado
       ? '<a class="btn btn-ghost btn-block" href="https://wa.me/5511985157388?text=' + encodeURIComponent("Olá! Quero saber mais sobre o " + (c.title || "campeonato") + " do Snooker Club Salto.") + '" target="_blank" rel="noopener" data-testid="championship-contact-btn">Falar com o clube no WhatsApp</a>'
-      : '<a class="btn btn-gold btn-block" href="inscricao.html?campeonato=' + encodeURIComponent(c.title) + '" data-testid="championship-register-btn">Inscrever meu time</a>';
+      : '<a class="btn btn-gold btn-block" href="inscricao.html?campeonato=' + encodeURIComponent(c.title) + '" data-testid="championship-register-btn">Inscrever meu time / Me inscrever</a>';
     return (
       '<article class="champ-card" data-testid="championship-card-item">' +
         '<div class="champ-top">' +
