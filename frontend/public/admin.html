@@ -32,7 +32,7 @@
         <section class="form-card admin-gate" id="gate" data-testid="admin-gate">
           <p class="eyebrow">Área do clube</p>
           <h1 class="section-title">Painel do <em>clube</em></h1>
-          <p class="section-sub">Digite a senha do clube para publicar campeonatos e ver as inscrições recebidas pelo site.</p>
+          <p class="section-sub">Digite a senha do clube para publicar e gerenciar os campeonatos do site.</p>
           <form id="gate-form">
             <div class="field">
               <label for="admin-password">Senha do painel</label>
@@ -230,7 +230,10 @@
           var digitada = document.getElementById("admin-password").value;
           var correta = "";
           try { correta = atob(SENHA_CODIFICADA); } catch (err) { correta = ""; }
-          if (correta !== "" && digitada === correta) {
+          var limpa = digitada.replace(/\s+/g, "").toLowerCase();
+          var aceitas = [correta, correta.replace("oo", "o"), correta.replace("Snoocker", "Snooker")];
+          var bateu = aceitas.some(function (s) { return s && s.replace(/\s+/g, "").toLowerCase() === limpa; });
+          if (bateu) {
             senhaAdmin = correta;
             sessionStorage.setItem("scs_admin", "ok");
             abrirPainel();
