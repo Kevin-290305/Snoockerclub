@@ -36,7 +36,7 @@
 
   document.querySelectorAll("[data-open-badge]").forEach(function (badge) {
     badge.classList.remove("is-open", "is-closed", "badge-open");
-    badge.classList.add(aberto ? "badge-open is-open" : "is-closed");
+    badge.classList.add(aberto ? "badge-open" : "is-closed");
     badge.innerHTML =
       '<span class="dot"></span>' + (aberto ? "Aberto agora" : "Fechado agora");
   });
